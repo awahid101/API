@@ -8,6 +8,5 @@ Make a request to `https://kyle1.azurewebsites.net/tgs/api/v1/:command/:format`,
 # Installing the API to your own server
 ```sh
 git clone git://github.com/TGS-App/API.git
-npm install
-node server.js
-````
+npm install && npm start
+```
