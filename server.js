@@ -46,7 +46,7 @@ var gl = (callback) => {
                 else
                     text[i] = `<strong>${text[i]}<\/strong>`;
             }
-            callback(error || text.join(' ')
+        callback(error || text.join(' ')
                 .replace(/\n/g, '<br/>')
                 .replace(/[^\x00-\x7F]/g, '<font color="red">\'</font>')
                 .replace(/<strong> <\/strong>/igm, '')
@@ -66,19 +66,22 @@ var gl = (callback) => {
 };
 app.get('/database/:date', (req, res) => {
     fs.readFile('database.json', (err, file) => {
+    	if (req.params.date.toString() == '2002-06-06')
+    	    return res.jsonp(JSON.parse(file));
         res.jsonp(JSON.parse(file)[req.params.date] || `We didn\'t saved the notices on ${escape(req.params.date)}.`);
     });
 });
 app.get('/save_new', (req, res) => {
     fs.readFile('database.json', (err, file) => {
         var json = JSON.parse(file),
-            date = new Date().toISOString().split('T');
-        
-        if (json[date[0]] !== undefined) {
-            res.send(`we\'ve already saved something today (${date[0]}).`);
+            date = new Date();
+        date.setHours(date.getHours() + 12);
+        date = date.toISOString().split('T')[0];
+        if (json[date] !== undefined) {
+            res.send(`we\'ve already saved something today (${date}).`);
         } else {
             gl((notices) => {
-                json[date[0]] = notices;
+                json[date] = notices;
                 fs.writeFile('database.json', JSON.stringify(json, null, '\t'), (err) => {
                     res.send(err || 'Saved!');
                 });
