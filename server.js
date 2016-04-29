@@ -48,13 +48,23 @@ var gl = (callback) => {
             }
             callback(error || text.join(' ')
                 .replace(/\n/g, '<br/>')
-                .replace(/(\\u0011|\\u0012|\\u0013)/g, '<font color=blue>*</font>')
-                .replace(/[^\x00-\x7F]/g, '<font color=red>\'</font>'));
+                .replace(/[^\x00-\x7F]/g, '<font color="red">\'</font>')
+                .replace(/<strong> <\/strong>/igm, '')
+                .replace(/<strong><\/strong>/mgi, '')
+                .replace(/<\/strong> <strong>/gim, ' ')
+                
+                .replace('ASSEMBLIES', '<hr/><h3>ASSEMBLIES</h3>')
+                .replace('GENERAL', '<hr/><h3>GENERAL</h3>')
+                .replace('LIBRARY', '<hr/><h3>LIBRARY</h3>')
+                .replace('PERFORMING ARTS', '<hr/><h3>PERFORMING ARTS</h3>')
+                .replace('SPORT', '<hr/><h3>SPORT</h3>')
+                .replace('CAREERS NOTICES ', '<hr/><h3>CAREERS NOTICES </h3>')
+                .replace('STUDENT SERVICES', '<hr/><h3>STUDENT SERVICES</h3>')
+                .replace(/<br\/><hr\/>/g, '<hr\/>')
+                .split(/DAY ./)[1]);
     });
 };
 app.get('/database/:date', (req, res) => {
-
-    
     fs.readFile('database.json', (err, file) => {
         res.jsonp(JSON.parse(file)[req.params.date] || `We didn\'t saved the notices on ${escape(req.params.date)}.`);
     });
