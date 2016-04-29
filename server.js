@@ -61,7 +61,7 @@ var gl = (callback) => {
                 .replace('CAREERS NOTICES ', '<hr/><h3>CAREERS NOTICES </h3>')
                 .replace('STUDENT SERVICES', '<hr/><h3>STUDENT SERVICES</h3>')
                 .replace(/<br\/><hr\/>/g, '<hr\/>')
-                .split(/DAY ./)[1]);
+            );
     });
 };
 app.get('/database/:date', (req, res) => {
