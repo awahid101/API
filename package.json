@@ -1,0 +1,20 @@
+{
+  "name": "klmn",
+  "version": "3.0.0",
+  "description": "klmn.azurewebsites.net",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "TGS",
+    "Azure",
+    "Notices"
+  ],
+  "author": "Kyle Hensel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "request": "^2.72.0"
+  }
+}
