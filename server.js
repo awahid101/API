@@ -1,8 +1,9 @@
 const express = require('express'),
-	  request = require('request'),
-	  fs = require('fs'),
+      request = require('request'),
+      fs = require('fs'),
+      SHA256 = require('./sha256'),
       chalk = require('chalk'),
-	  port = process.env.PORT || 3698;
+      port = process.env.PORT || 3698;
 
 var app = express();
 
@@ -69,6 +70,24 @@ app.get('/database/:date', (req, res) => {
     	if (req.params.date.toString() == '2002-06-06')
     	    return res.jsonp(JSON.parse(file));
         res.jsonp(JSON.parse(file)[req.params.date] || `We didn\'t saved the notices on ${escape(req.params.date)}.`);
+    });
+});
+app.get('/database/:command/:date', (req, res) => {
+    if (SHA256(req.query.auth ? req.query.auth.toString() : '') != '2a281435878ec2c138c76d42f4035f330e13bb67cc383734683c85ffea114ecc')
+        return res.send('Invalid token');
+    fs.readFile('database.json', (err, file) => {
+        if (err)
+            return res.send(err);
+        var db = JSON.parse(file);
+        if (req.params.command == 'delete')
+            delete db[req.params.date];
+        else if (req.params.command == 'update')
+            db[req.params.date] = req.query.value || '';
+        else
+            return res.send('Invalid command');
+        fs.writeFile('database.json', JSON.stringify(db, null, '\t'), (err) => {
+            res.send(err || `${req.params.command}d archive for ${req.params.date}.`);
+        });
     });
 });
 app.get('/save_new', (req, res) => {
