@@ -45,14 +45,14 @@ var gl = (callback) => {
                 if (text[i] === '' || text[i] == ' ')
                     text[i] = '';
                 else
-                    text[i] = `<strong>${text[i]}<\/strong>`;
+                    text[i] = `<em>${text[i]}<\/em>`;
             }
         callback(error || text.join(' ')
                 .replace(/\n/g, '<br/>')
                 .replace(/[^\x00-\x7F]/g, '<font color="red">\'</font>')
-                .replace(/<strong> <\/strong>/igm, '')
-                .replace(/<strong><\/strong>/mgi, '')
-                .replace(/<\/strong> <strong>/gim, ' ')
+                .replace(/<em> <\/em>/igm, '')
+                .replace(/<em><\/em>/mgi, '')
+                .replace(/<\/em> <em>/gim, ' ')
                 
                 .replace('ASSEMBLIES', '<hr/><h3>ASSEMBLIES</h3>')
                 .replace('GENERAL', '<hr/><h3>GENERAL</h3>')
