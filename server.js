@@ -65,6 +65,11 @@ var gl = (callback) => {
             );
     });
 };
+app.get('/database(.js(on)?)?', (req, res) => {
+    fs.readFile('database.json', (err, file) => {
+    	res.jsonp(err || Object.keys(JSON.parse(file)));
+    });
+});
 app.get('/database/:date', (req, res) => {
     fs.readFile('database.json', (err, file) => {
     	if (req.params.date.toString() == '2002-06-06')
@@ -108,6 +113,7 @@ app.get('/save_new', (req, res) => {
         }
     });
 });
+app.use(express.static('public'));
 app.listen(port, () => {
     console.log(`Server running on port ${chalk.cyan(port)}`);
 });

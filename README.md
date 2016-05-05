@@ -9,7 +9,7 @@ npm install && npm start
 
 # Get a specified date's notices
 ```handlebars
-http://{{base_url}}/database/{{yyyy-mm-dd}}/?callback={{function_name}}
+http://{{base_url}}/database/{{yyyy-mm-dd}}/
 ```   
 Example: `http://klmn.azurewebsites.net/database/2016-04-29?callback=notices_function`
 
@@ -21,3 +21,18 @@ http://{{base_url}}/database/update/{{yyyy-mm-dd}}/?auth={{token}}&value={{new_v
 ```handlebars
 http://{{base_url}}/database/delete/{{yyyy-mm-dd}}/?auth={{token}}
 ```   
+# Get all the saved dates
+```handlebars
+http://{{base_url}}/database[.js[on]]
+```   
+All the routes have `JSONP` support, just add a `callback` parameter with the function name.
+Example:
+```html
+<script src="{{base_url}}/database.js?callback=bacon"></script>
+<script>
+    function bacon(APIResponse) {
+        for (var notice in APIResponse)
+            console.log(notice);
+    }
+</script>
+```
