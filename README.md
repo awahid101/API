@@ -25,6 +25,7 @@ http://{{base_url}}/database/delete/{{yyyy-mm-dd}}/?auth={{token}}
 ```handlebars
 http://{{base_url}}/database[.js[on]]
 ```   
+<hr />
 All the routes have `JSONP` support, just add a `callback` parameter with the function name.
 Example:
 ```html

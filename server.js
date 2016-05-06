@@ -3,7 +3,12 @@ const express = require('express'),
       fs = require('fs'),
       SHA256 = require('./sha256'),
       chalk = require('chalk'),
-      port = process.env.PORT || 3698;
+      port = process.env.PORT || 3698,
+      shorten = (t, r) => {
+          var n = t.length > r,
+              s = n ? t.substr(0, r - 1) : t;
+          return s = n ? s.substr(0, s.lastIndexOf(" ")) : s, n ? s + "..." : s;
+      };
 
 var app = express();
 
@@ -59,12 +64,30 @@ var gl = (callback) => {
                 .replace('LIBRARY', '<hr/><h3>LIBRARY</h3>')
                 .replace('PERFORMING ARTS', '<hr/><h3>PERFORMING ARTS</h3>')
                 .replace('SPORT', '<hr/><h3>SPORT</h3>')
-                .replace('CAREERS NOTICES ', '<hr/><h3>CAREERS NOTICES </h3>')
+                .replace('CAREERS NOTICES', '<hr/><h3>CAREERS NOTICES </h3>')
                 .replace('STUDENT SERVICES', '<hr/><h3>STUDENT SERVICES</h3>')
                 .replace(/<br\/><hr\/>/g, '<hr\/>')
             );
     });
 };
+app.get('/news(.js(on)?)?', (req, res) => {
+    request({
+        uri: 'https://www.instagram.com/takapuna.grapevine/media/',
+        method: 'GET'
+    }, function (err, resp, data) {
+        if (err)
+            return res.jsonp(err);
+        var n = [];
+        data = JSON.parse(data);
+        for (var i = 0; i < data.items.length; i++) {
+            n[i] = { //list!
+                "thumbnail": data.items[i].images.thumbnail.url,
+                "caption": shorten(data.items[i].caption.text.replace(/\n/g, '<br />'), 200) + ' <a href="' + data.items[i].link + '">Read more</a>.'
+            };
+        }
+        res.jsonp(n);
+    });
+});
 app.get('/database(.js(on)?)?', (req, res) => {
     fs.readFile('database.json', (err, file) => {
     	res.jsonp(err || Object.keys(JSON.parse(file)));
@@ -114,6 +137,9 @@ app.get('/save_new', (req, res) => {
     });
 });
 app.use(express.static('public'));
+app.use((req, res, next) => {
+    res.status(404).redirect('http://tgs-app.github.io');
+});
 app.listen(port, () => {
     console.log(`Server running on port ${chalk.cyan(port)}`);
 });
