@@ -1,4 +1,4 @@
-const debug = false,
+const sms = false,
 
       requireNew = require('require-new'),
       downloader = require('./download'),
@@ -15,7 +15,7 @@ const debug = false,
       },
       sendReport = (value2, value3) => 
           request({
-              uri: `https://maker.ifttt.com/trigger/${debug ? 'send' : 'sms'}/with/key/beLHmIjsKLpsfLFe0_-Ig-`,
+              uri: `https://maker.ifttt.com/trigger/${sms ? 'sms' : 'send'}/with/key/beLHmIjsKLpsfLFe0_-Ig-`,
               method: 'GET',
               qs: {
                   value1: '[IFTTT] Server Report: ',
