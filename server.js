@@ -4,8 +4,10 @@ const sms = false,
       downloader = require('./download'),
       express = require('express'),
       request = require('request'),
+      SHA256 = require('./sha256'),
       chalk = require('chalk'),
       fs = require('fs'),
+      
       port = process.env.PORT || 3699,
       shorten = (t, r) => {
           var n = t.length > r,
@@ -28,6 +30,9 @@ require('./test');
 
 var app = express();
 
+app.get('/', (req, res) => {
+   res.send(new Date() + '');
+});
 app.get('/database/all', (req, res) => {
     var file = requireNew('./database');
     res.send(file);
@@ -77,9 +82,9 @@ app.get('/download', (req, res) => {
                 </li>`;
             fs.writeFile('./news.json', JSON.stringify({
                 file: r + `<li>
-                                <center>
+                              <center>
                                 More news on <a href="https://instagram.com/takapuna.grapevine/">Instagram</a>
-                                </center>
+                              </center>
                             </li>`}, null, 4), (err) => {
                 callback(err ? 'failed to save news' : 'saved news');
             });
@@ -88,7 +93,7 @@ app.get('/download', (req, res) => {
     function notices(callback) {
         var json = requireNew('./database'),
             date = new Date();
-        date.setHours(date.getHours() + 12);
+        date.setHours(date.getHours() + date.getTimezoneOffset() / 60);
         date = date.toISOString().split('T')[0];
         if (json[date] !== undefined) 
             return callback(`already saved notices today (${date})`);
