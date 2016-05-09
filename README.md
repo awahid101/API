@@ -1,5 +1,6 @@
 # API
-:school: The API for the TGS notices
+:school: The API for the TGS daily notices and news.   
+This server only downloads and saves the daily notices/news, then periodicly syncs with [tgs.kyle.cf](http://tgs.kyle.cf)
 
 ```sh
 git clone git://github.com/TGS-App/API.git
