@@ -51,8 +51,8 @@ app.get('/sync', (req, res) => {
         uri: 'http://tgs.kyle.cf/sync',
         method: 'PUT',
         json: {
-            notices: requireNew('./database'),
-            news: requireNew('./news')
+            notices: JSON.stringify(requireNew('./database')),
+            news: JSON.stringify(requireNew('./news'))
         }
     }, (error, response, data) => {
         sendReport(`syncing ${req.query.src == 'ifttt' ? '(from IFTTT) ' : ''} ${error ? 'failed' : 'succeeded'}`);
