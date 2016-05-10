@@ -93,7 +93,7 @@ app.get('/download', (req, res) => {
     function notices(callback) {
         var json = requireNew('./database'),
             date = new Date();
-        date.setHours(date.getHours() + 24);
+        date.setHours(date.getHours() + 0 + 24);
         date = date.toISOString().split('T')[0];
         if (json[date] !== undefined) 
             return callback(`already saved notices today (${date})`);
