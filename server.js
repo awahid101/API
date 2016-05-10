@@ -31,14 +31,7 @@ require('./test');
 var app = express();
 
 app.get('/', (req, res) => {
-    var x = new Date();
-    x.setHours(x.getHours() + 24);
-    res.send(`
-    24h: ${x}
-    24h (ISO): ${x.toISOString()}
-    <hr />
-    Date: ${new Date()}
-    Date (ISO): ${new Date().toISOString()}`.replace(/\n/g, '<br>'));
+    res.send(new Date());
 });
 app.get('/database/all', (req, res) => {
     var file = requireNew('./database');
@@ -100,7 +93,7 @@ app.get('/download', (req, res) => {
     function notices(callback) {
         var json = requireNew('./database'),
             date = new Date();
-        date.setHours(date.getHours() + date.getTimezoneOffset() / 60);
+        date.setHours(date.getHours() + 24);
         date = date.toISOString().split('T')[0];
         if (json[date] !== undefined) 
             return callback(`already saved notices today (${date})`);
