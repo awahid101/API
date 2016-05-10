@@ -31,7 +31,14 @@ require('./test');
 var app = express();
 
 app.get('/', (req, res) => {
-   res.send(new Date() + '');
+    var x = new Date();
+    x.setHours(x.getHours() + 24);
+    res.send(`
+    24h: ${x}
+    24h (ISO): ${x.toISOString()}
+    <hr />
+    Date: ${new Date()}
+    Date (ISO): ${new Date().toISOString()}`.replace(/\n/g, '<br>'));
 });
 app.get('/database/all', (req, res) => {
     var file = requireNew('./database');
