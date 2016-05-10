@@ -1,6 +1,8 @@
 # API
-:school: The API for the TGS daily notices and news.   
-This server only downloads and saves the daily notices/news, then periodicly syncs with [tgs.kyle.cf](http://tgs.kyle.cf)
+:school: The API for the TGS Daily Notices and News.   
+
+This server only downloads and saves the daily notices & news,
+then periodicly syncs with [tgs.kyle.cf](http://tgs.kyle.cf)
 
 ```sh
 git clone git://github.com/TGS-App/API.git
@@ -8,33 +10,31 @@ cd API
 npm install && npm start
 ```
 
-# Get a specified date's notices
+# Get all the saved notices
 ```handlebars
-http://{{base_url}}/database/{{yyyy-mm-dd}}/
+http://{{base_url}}/database/all
 ```   
-Example: `http://klmn.azurewebsites.net/database/2016-04-29?callback=notices_function`
 
 # Update an entry
 ```handlebars
-http://{{base_url}}/database/update/{{yyyy-mm-dd}}/?auth={{token}}&value={{new_value}}
+http://{{base_url}}/database/update/{{yyyy-mm-dd}}/?value={{new_value}}
 ```   
+
 # Delete an entry
 ```handlebars
-http://{{base_url}}/database/delete/{{yyyy-mm-dd}}/?auth={{token}}
+http://{{base_url}}/database/delete/{{yyyy-mm-dd}}
 ```   
-# Get all the saved dates
+
+# Download & update the database
 ```handlebars
-http://{{base_url}}/database[.js[on]]
+http://{{base_url}}/download
 ```   
+this command is run every day at 7 a.m.
+
+# Sync to [tgs.kyle.cf](http://tgs.kyle.cf)
+```handlebars
+http://{{base_url}}/sync
+```   
+this command is run every hour.
+
 <hr />
-All the routes have `JSONP` support, just add a `callback` parameter with the function name.
-Example:
-```html
-<script src="{{base_url}}/database.js?callback=bacon"></script>
-<script>
-    function bacon(APIResponse) {
-        for (var notice in APIResponse)
-            console.log(notice);
-    }
-</script>
-```
