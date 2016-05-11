@@ -5,6 +5,7 @@ const sms = false,
       express = require('express'),
       request = require('request'),
       SHA256 = require('./sha256'),
+      KAMAR = require('./kamar'),
       chalk = require('chalk'),
       fs = require('fs'),
       
@@ -13,7 +14,7 @@ const sms = false,
           var n = t.length > r,
               s = n ? t.substr(0, r - 1) : t;
           return s = n ? s.substr(0, s.lastIndexOf(" ")) : s,
-                     n ? s + "..." : s;
+                     n ? `${s}...` : s;
       },
       sendReport = (value2, value3) => 
           request({
@@ -51,9 +52,10 @@ app.get('/database/:command/:date', (req, res) => {
         res.send(err || `${req.params.command}d archive for ${req.params.date}.`);
     });
 });
+app.get('/kamar/:action', KAMAR);
 app.get('/sync', (req, res) => {
     request({
-        uri: 'http://tgs.kyle.cf/sync',
+        uri: `http://${req.query.dev ? `${req.query.dev}.ngrok.io` : 'tgs.kyle.cf'}/sync`,
         method: 'PUT',
         json: {
             notices: JSON.stringify(requireNew('./database')),
@@ -108,7 +110,7 @@ app.get('/download', (req, res) => {
     }
     news(stdout1 => {
         notices(stdout2 => {
-            res.send(void sendReport(stdout1 + ', ', stdout2) || 'done');
+            res.send(void sendReport(`${stdout1}, `, stdout2) || 'done');
         });
     });
 });

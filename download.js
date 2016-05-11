@@ -24,7 +24,7 @@ module.exports = (callback) => {
             text[i] = raw[i][0].s;
         
         text = text
-                .join('###')
+                .join('<font color="aqua">###</font>')
                 .replace('ASSEMBLIES', '<hr/><h3>ASSEMBLIES</h3>')
                 .replace('GENERAL', '<hr/><h3>GENERAL</h3>')
                 .replace('LIBRARY', '<hr/><h3>LIBRARY</h3>')

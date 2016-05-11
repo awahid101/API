@@ -3,4 +3,5 @@ public/index.html
 web.config
 node_modules
 database.json
+cookies.json
 news.json
