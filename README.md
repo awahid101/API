@@ -1,6 +1,9 @@
-# API
+# TGS App API
 [![Inline docs](http://inch-ci.org/github/tgs-app/api.svg?branch=master)](http://inch-ci.org/github/tgs-app/api)
 [![Build Status](https://travis-ci.org/TGS-App/API.svg?branch=master)](https://travis-ci.org/TGS-App/API)
+[![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](LICENSE)
+[![Last Sync](http://tgs.kyle.cf/badge.svg?i=0)](http://tgs.kyle.cf)
+[![Notices](http://tgs.kyle.cf/badge.svg?i=1)](http://tgs.kyle.cf)
 
 :school: The API for the TGS Daily Notices and News.   
 
