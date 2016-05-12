@@ -5,7 +5,6 @@ const sms = false,
       express = require('express'),
       request = require('request'),
       SHA256 = require('./sha256'),
-      KAMAR = require('./kamar'),
       chalk = require('chalk'),
       fs = require('fs'),
       
@@ -28,6 +27,7 @@ const sms = false,
           });
       
 require('./test');
+const KAMAR = require('./kamar'); //must be after test
 
 var app = express();
 

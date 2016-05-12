@@ -1,5 +1,6 @@
 const FileCookieStore = require('tough-cookie-filestore'),
       request = require('request'),
+      chalk = require('chalk'),
       portal = 'https://portal.takapuna.school.nz/student/index.php';
 
 var j = request.jar(new FileCookieStore('cookies.json'));
@@ -12,7 +13,7 @@ module.exports = (req, res) => {
             jar: j,
             form: {
                 username: req.query.username,
-                password: req.query.password
+                password: decodeURIComponent(req.query.password)
             }
         }, () => {
             res.send(j.getCookies(`${portal}/process-login`));
@@ -73,7 +74,7 @@ module.exports = (req, res) => {
                 });
             } catch (Exception) {
                 console.error(chalk.red(Exception));
-                return res.send(Exception);
+                return res.send('invalid login Or timeout');
             }
         });
     }
