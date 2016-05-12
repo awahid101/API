@@ -53,7 +53,6 @@ module.exports = (req, res) => {
                 .replace(/HM=&nbsp;/, '')
                 .replace(/\=/g, '')
                 .split(/\^\t/);
-            } finally {
                 for (var i = 0; i < ___.length; i++) {
                     ___[i] = ___[i].split(/\n\n\n(\n|\$\=)/);
                     for (var j = 0; j < ___[i].length; j++){
@@ -72,6 +71,9 @@ module.exports = (req, res) => {
                     "Thu": [___[1][4], ___[2][4], ___[3][6],    [/**/], ___[5][6], ___[6][6], ___[7][6]],
                     "Fri": [___[1][6], ___[2][6], ___[3][8],    [/**/], ___[5][8], ___[6][8], ___[7][8]], 
                 });
+            } catch (Exception) {
+                console.error(chalk.red(Exception));
+                return res.send(Exception);
             }
         });
     }
