@@ -1,4 +1,7 @@
 # API
+[![Inline docs](http://inch-ci.org/github/tgs-app/api.svg?branch=master)](http://inch-ci.org/github/tgs-app/api)
+[![Build Status](https://travis-ci.org/TGS-App/API.svg?branch=master)](https://travis-ci.org/TGS-App/API)
+
 :school: The API for the TGS Daily Notices and News.   
 
 This server only downloads and saves the daily notices & news,
