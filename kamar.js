@@ -75,7 +75,7 @@ module.exports = (req, res) => {
                     });
                 else res.jsonp(`
                             <tr>
-                              <td class="red"                                                           >Form           </td>
+                              <td><strong>Form</strong></td>
                               <td onclick="alert(this.innerHTML + ': ${___[1][0][1]}, ${___[1][0][2]}')">${___[1][0][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[1][2][1]}, ${___[1][2][2]}')">${___[1][2][0]}</td>
                               <td                                                                       >               </td>
@@ -83,7 +83,7 @@ module.exports = (req, res) => {
                               <td onclick="alert(this.innerHTML + ': ${___[1][6][1]}, ${___[1][6][2]}')">${___[1][6][0]}</td>
                             </tr>
                             <tr>
-                              <td class="red"                                                           >Period 1       </td>
+                              <td><strong>P1</strong></td>
                               <td onclick="alert(this.innerHTML + ': ${___[2][0][1]}, ${___[2][0][2]}')">${___[2][0][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[2][2][1]}, ${___[2][2][2]}')">${___[2][2][0]}</td>
                               <td                                                                       >               </td>
@@ -91,7 +91,7 @@ module.exports = (req, res) => {
                               <td onclick="alert(this.innerHTML + ': ${___[2][6][1]}, ${___[2][6][2]}')">${___[2][6][0]}</td>
                             </tr>
                             <tr>
-                              <td class="red"                                                           >Period 2       </td>
+                              <td><strong>P2</strong></td>
                               <td onclick="alert(this.innerHTML + ': ${___[3][0][1]}, ${___[3][0][2]}')">${___[3][0][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[3][2][1]}, ${___[3][2][2]}')">${___[3][2][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[3][4][1]}, ${___[3][4][2]}')">${___[3][4][0]}</td>
@@ -99,7 +99,7 @@ module.exports = (req, res) => {
                               <td onclick="alert(this.innerHTML + ': ${___[3][8][1]}, ${___[3][8][2]}')">${___[3][8][0]}</td>
                             </tr>
                             <tr>
-                              <td class="red" title="House/Manaaki"                                     >HM             </td>
+                              <td title="House/Manaaki"><strong>HM</strong></td>
                               <td                                                                       >               </td>
                               <td                                                                       >               </td>
                               <td onclick="alert(this.innerHTML + ': ${___[4][2][1]}, ${___[4][2][2]}')">${___[4][2][0]}</td>
@@ -107,7 +107,7 @@ module.exports = (req, res) => {
                               <td                                                                       >               </td>
                             </tr>
                             <tr>
-                              <td class="red"                                                           >Period 3       </td>
+                              <td><strong>P3</strong></td>
                               <td onclick="alert(this.innerHTML + ': ${___[5][0][1]}, ${___[5][0][2]}')">${___[5][0][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[5][2][1]}, ${___[5][2][2]}')">${___[5][2][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[5][4][1]}, ${___[5][4][2]}')">${___[5][4][0]}</td>
@@ -115,7 +115,7 @@ module.exports = (req, res) => {
                               <td onclick="alert(this.innerHTML + ': ${___[5][8][1]}, ${___[5][8][2]}')">${___[5][8][0]}</td>
                             </tr>
                             <tr>
-                              <td class="red"                                                           >Period 4       </td>
+                              <td><strong>P4</strong></td>
                               <td onclick="alert(this.innerHTML + ': ${___[6][0][1]}, ${___[6][0][2]}')">${___[6][0][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[6][2][1]}, ${___[6][2][2]}')">${___[6][2][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[6][4][1]}, ${___[6][4][2]}')">${___[6][4][0]}</td>
@@ -123,7 +123,7 @@ module.exports = (req, res) => {
                               <td onclick="alert(this.innerHTML + ': ${___[6][8][1]}, ${___[6][8][2]}')">${___[6][8][0]}</td>
                             </tr>
                             <tr>
-                              <td class="red"                                                           >Period 5       </td>
+                              <td><strong>P5</strong></td>
                               <td onclick="alert(this.innerHTML + ': ${___[7][0][1]}, ${___[7][0][2]}')">${___[7][0][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[7][2][1]}, ${___[7][2][2]}')">${___[7][2][0]}</td>
                               <td onclick="alert(this.innerHTML + ': ${___[7][4][1]}, ${___[7][4][2]}')">${___[7][4][0]}</td>
