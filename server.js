@@ -15,6 +15,18 @@ const sms = false,
           return s = n ? s.substr(0, s.lastIndexOf(" ")) : s,
                      n ? `${s}...` : s;
       },
+      trueDate = UTCoffset => {
+        var d = new Date(),
+            utc = d.getTime() + (d.getTimezoneOffset() * 60000),
+            n = new Date(utc + (3600000 * UTCoffset)),
+            f = n.toLocaleString().toString().split(', '),
+            e = f[0].split('/');
+            if (Number(e[0]) < 10)
+                e[0] = 0 + e[0];
+            if (Number(e[1]) < 10)
+                e[1] = 0 + e[1];
+        return [`${e[1]}-${e[0]}-${e[2]}`, f[1]]; //DST?
+      },
       sendReport = (value2, value3) => 
           request({
               uri: `https://maker.ifttt.com/trigger/${sms ? 'sms' : 'send'}/with/key/beLHmIjsKLpsfLFe0_-Ig-`,
@@ -31,9 +43,7 @@ const KAMAR = require('./kamar'); //must be after test
 
 var app = express();
 
-app.get('/', (req, res) => {
-    res.send(new Date());
-});
+app.get('/', (req, res) => res.send('The local time in Auckland is ' + date(+12).join('. ')));
 app.get('/database/all', (req, res) => {
     var file = requireNew('./database');
     res.send(file);
