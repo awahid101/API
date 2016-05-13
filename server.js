@@ -44,10 +44,7 @@ const KAMAR = require('./kamar'); //must be after test
 var app = express();
 
 app.get('/', (req, res) => res.send('The local time in Auckland is ' + trueTime(+12).join('. ')));
-app.get('/database/all', (req, res) => {
-    var file = requireNew('./database');
-    res.send(file);
-});
+app.get('/database/all(.json)?', (req, res) => res.send(requireNew('./database')));
 app.get('/database/:command/:date', (req, res) => {
     if (SHA256(req.query.auth ? req.query.auth.toString() : '') != '2a281435878ec2c138c76d42f4035f330e13bb67cc383734683c85ffea114ecc')
         return res.send('Invalid token');
@@ -73,7 +70,7 @@ app.get('/sync', (req, res) => {
         }
     }, (error, response, data) => {
         try {
-            var report = `sync ${req.query.src == 'ifttt' ? '(IFTTT) ' : ''} ${error ? 'failed' : 'done'}`;
+            var report = `sync${req.query.src == 'ifttt' ? ' (IFTTT)' : ' '} ${error ? 'failed' : 'done'}`;
             if (report != 'sync (IFTTT) done')
                 sendReport(report);
             
