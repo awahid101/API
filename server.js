@@ -72,13 +72,17 @@ app.get('/sync', (req, res) => {
             news: JSON.stringify(requireNew('./news'))
         }
     }, (error, response, data) => {
-        var report = `syncing ${req.query.src == 'ifttt' ? '(from IFTTT) ' : ''} ${error ? 'failed' : 'succeeded'}`;
-        if (report != 'syncing (from IFTTT) succeeded')
-            sendReport(report);
-        
-        if (req.query.r.toString() == 'y')
-            return res.redirect('http://tgs.kyle.cf');
-        res.send(data);
+        try {
+            var report = `sync ${req.query.src == 'ifttt' ? '(IFTTT) ' : ''} ${error ? 'failed' : 'done'}`;
+            if (report != 'sync (IFTTT) done')
+                sendReport(report);
+            
+            if (req.query.r && req.query.r.toString() == 'y')
+                return res.redirect('http://tgs.kyle.cf');
+            res.send(data);
+        } catch (err) {
+            sendReport(`sync error: ${err}`);
+        }
     });
 });
 app.get('/download', (req, res) => {
