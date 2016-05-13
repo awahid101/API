@@ -25,14 +25,14 @@ const sms = false,
                 e[0] = 0 + e[0];
             if (Number(e[1]) < 10)
                 e[1] = 0 + e[1];
-        return [`${e[1]}-${e[0]}-${e[2]}`, f[1]]; //DST?
+        return [`${e[1]}-${e[0]}-${e[2]}`, f[1]]; //DST - https://msdn.microsoft.com/en-us/library/jj863688(v=vs.85).aspx?
       },
       sendReport = (value2, value3) => 
           request({
               uri: `https://maker.ifttt.com/trigger/${sms ? 'sms' : 'send'}/with/key/beLHmIjsKLpsfLFe0_-Ig-`,
               method: 'GET',
               qs: {
-                  value1: '[IFTTT] Server Report: ',
+                  value1: 'TGSBot: ',
                   value2,
                   value3
               }
@@ -72,7 +72,12 @@ app.get('/sync', (req, res) => {
             news: JSON.stringify(requireNew('./news'))
         }
     }, (error, response, data) => {
-        sendReport(`syncing ${req.query.src == 'ifttt' ? '(from IFTTT) ' : ''} ${error ? 'failed' : 'succeeded'}`);
+        var report = `syncing ${req.query.src == 'ifttt' ? '(from IFTTT) ' : ''} ${error ? 'failed' : 'succeeded'}`;
+        if (report != 'syncing (from IFTTT) succeeded')
+            sendReport(report);
+        
+        if (req.query.r.toString() == 'y')
+            return res.redirect('http://tgs.kyle.cf');
         res.send(data);
     });
 });
@@ -104,9 +109,7 @@ app.get('/download', (req, res) => {
     }
     function notices(callback) {
         var json = requireNew('./database'),
-            date = new Date();
-        date.setHours(date.getHours() + 0 + 24);
-        date = date.toISOString().split('T')[0];
+            date = trueTime(+12)[0];
         if (json[date] !== undefined) 
             return callback(`already saved notices today (${date})`);
         else {
