@@ -15,7 +15,7 @@ const sms = false,
           return s = n ? s.substr(0, s.lastIndexOf(" ")) : s,
                      n ? `${s}...` : s;
       },
-      trueDate = UTCoffset => {
+      trueTime = UTCoffset => {
         var d = new Date(),
             utc = d.getTime() + (d.getTimezoneOffset() * 60000),
             n = new Date(utc + (3600000 * UTCoffset)),
@@ -43,7 +43,7 @@ const KAMAR = require('./kamar'); //must be after test
 
 var app = express();
 
-app.get('/', (req, res) => res.send('The local time in Auckland is ' + date(+12).join('. ')));
+app.get('/', (req, res) => res.send('The local time in Auckland is ' + trueTime(+12).join('. ')));
 app.get('/database/all', (req, res) => {
     var file = requireNew('./database');
     res.send(file);
