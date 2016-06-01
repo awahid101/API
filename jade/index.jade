@@ -1,0 +1,88 @@
+doctype html
+html
+  head
+    title TGS App &middot; Home
+    meta(charset='utf-8')
+    meta(name='author', content='Kyle Hensel')
+    meta(name='robots', content='noindex, nofolow')
+    meta(http-equiv='Content-Language', content='en')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(http-equiv="X-Content-Security-Policy", content="default-src 'self' *.google.com kyle2.azurewebsites.net")
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no')
+    meta(name='keywords', content='TGS, TGS App, Takapuna Grammar School, Takapuna Grammar School App, TGS Notices, Notices')
+    meta(name='description', content='The unofficial app for Takapuna Grammar School. View the daily notices, news, timetables, reports and more!')
+    
+    meta(property='og:title', content='TGS App')
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='http://kyle2.azurewebsites.net')
+    meta(property='og:image', content='./img/favicon.png')
+    
+    meta(name='format-detection', content='telephone=no')
+    meta(name='apple-mobile-web-app-title', content='TGS App')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+    link(rel='apple-touch-icon', href='./img/favicon.png')
+    link(rel='apple-touch-startup-image', href='./img/startup.jpg')
+    meta(name='theme-color', content='#2196f3')
+    meta(name='mobile-web-app-capable', content='yes')
+    meta(name='application-name', content='TGS App')
+    meta(name='msapplication-TileColor', content='#1E90FF')
+    meta(name="msapplication-square70x70logo", content="./img/tiny.png")
+    meta(name="msapplication-square150x150logo", content="./img/square.png")
+    meta(name="msapplication-wide310x150logo", content="./img/wide.png")
+    meta(name="msapplication-square310x310logo", content="./img/large.png")
+    link(rel='stylesheet', href='tgs.css', async)
+  body
+    ul.navbar.large.teal.left-align
+      li.hide-medium.hide-large.teal.opennav.right
+        a(href="javascript:$(null)") ☰
+      li
+        a(href="#/", onclick="_(0)") TGS App
+      li.hide-small
+        a(href="#/notices", onclick="_(1)") Notices
+      li.hide-small
+        a(href="#/news", onclick="_(2)") News
+      li.hide-small
+        a(href="#/about", onclick="_(3)") About
+
+    #nav.hide.hide-large.hide-medium
+      ul.navbar.left-align.large.teal
+        li
+          a(href="#/notices", onclick="$(1)") Notices
+        li
+          a(href="#/news", onclick="$(2)") News
+        li
+          a(href="#/about", onclick="$(3)") About
+    .container
+      .pages
+        #0
+          p.
+            This is the TGS App. !{'<br>'}
+            Version !{version}.
+        #1(hidden)
+          h2 Daily Notices
+          .google
+          ul.ul.hoverable !{notices}
+        #2(hidden)
+          h2 School News
+          ul.ul.card-4 !{news}
+        #3(hidden)
+          h2 About
+          p
+            | The TGS App is not official. 
+            a(href="https://github.com/tgs-app/api") View on GitHub.
+  footer.bottom.teal.container
+    center
+      small
+        a(href="http://github.com/tgs-app") About 
+        | | 
+        a(href="http://github.com/k-yle") Contact 
+        | | 
+        a(href="http://github.com/tgs-app") View on Github
+    script(src="//translate.google.com/translate_a/element.js?cb=g", defer)
+    script.
+      function g(){new google.translate.TranslateElement({pageLanguage:'en'},'google');};
+      function d(id){return document.getElementById(id);};
+      function _(n){d(0).hidden=!0;d(1).hidden=!0;d(2).hidden=!0;d(3).hidden=!0;d(n).hidden=!1;};
+      function $(n){var x = d('nav');x.className.indexOf('show')==-1?x.className+=' show':x.className=x.className.replace(' show', '');n!=null&&_(n);};

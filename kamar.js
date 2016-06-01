@@ -1,7 +1,7 @@
 const FileCookieStore = require('tough-cookie-filestore'),
       request = require('request'),
       chalk = require('chalk'),
-      portal = 'https://portal.takapuna.school.nz/student/index.php';
+      portal = 'https://portal.takapuna.school.nz/student/index.php'; //tgs-kamar.local
 
 module.exports = (req, res) => {
     var j = request.jar(new FileCookieStore('cookies.json'));

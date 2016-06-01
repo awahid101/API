@@ -1,14 +1,13 @@
-# TGS App API
+# TGS App & Skype Bot
 [![Inline docs](http://inch-ci.org/github/tgs-app/api.svg?branch=master)](http://inch-ci.org/github/tgs-app/api)
 [![Build Status](https://travis-ci.org/TGS-App/API.svg?branch=master)](https://travis-ci.org/TGS-App/API)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](LICENSE)
 [![Last Sync](http://tgs.kyle.cf/badge.svg?i=0)](http://tgs.kyle.cf)
 [![Notices](http://tgs.kyle.cf/badge.svg?i=1)](http://tgs.kyle.cf)
 
-:school: The API for the TGS Daily Notices and News.   
+:school: Web-App & Skype Bot for TGS Daily Notices and News.   
 
-This server only downloads and saves the daily notices & news,
-then periodicly syncs with [tgs.kyle.cf](http://tgs.kyle.cf)
+Hosted on [Azure](http://kyle2.azurewebsites.net) and [OpenShift](http://tgs.kyle.cf)
 
 ```sh
 git clone git://github.com/TGS-App/API.git
@@ -16,31 +15,9 @@ cd API
 npm install && npm start
 ```
 
-# Get all the saved notices
+# Read the database
 ```handlebars
-http://{{base_url}}/database/all
+http://{{base_url}}/api/v1/?q={{item}}
 ```   
 
-# Update an entry
-```handlebars
-http://{{base_url}}/database/update/{{yyyy-mm-dd}}/?value={{new_value}}
-```   
-
-# Delete an entry
-```handlebars
-http://{{base_url}}/database/delete/{{yyyy-mm-dd}}
-```   
-
-# Download & update the database
-```handlebars
-http://{{base_url}}/download
-```   
-this command is run every day at 7 a.m.
-
-# Sync to [tgs.kyle.cf](http://tgs.kyle.cf)
-```handlebars
-http://{{base_url}}/sync
-```   
-this command is run every hour.
-
-<hr />
+where `{{item}}` is either `notices` or `news`
