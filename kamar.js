@@ -56,7 +56,7 @@ module.exports = (req, res) => {
                 .split(/\^\t/);
                 for (var i = 0; i < ___.length; i++) {
                     ___[i] = ___[i].split(/\n\n\n(\n|\$\=)/);
-                    for (var j = 0; j < ___[i].length; j++){
+                    for (var j = 0; j < ___[i].length; j++) {
                         if (___[i][j].trim() === '')
                             ___[i][j] = null;
                         if (___[i][j] == '\n' || ___[i][j] == '$=')
@@ -132,8 +132,8 @@ module.exports = (req, res) => {
                             </tr>`);
             } catch (Exception) {
                 console.error(chalk.red(Exception));
-                return res.send('invalid login Or timeout');
-            } finally{/* who cares? */}
+                return res.send('invalid login or timeout');
+            }
         });
     }
 };

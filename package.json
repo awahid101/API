@@ -1,6 +1,6 @@
 {
   "name": "tgsapp",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "TGS App & Skype Bot - powered by http://botframework.com",
   "main": "server.js",
   "dependencies": {
@@ -13,6 +13,7 @@
     "tough-cookie-filestore": "0.0.1"
   },
   "scripts": {
+    "test": "eslint *.js && echo Lint passed.",
     "start": "node server.js"
   },
   "repository": {
@@ -34,5 +35,8 @@
   "homepage": "https://kyle2.azurewebsites.net",
   "engines": {
     "node": ">=5.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.11.1"
   }
 }
