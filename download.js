@@ -57,29 +57,43 @@ module.exports = {
             }, (error, response, data) => {
                 if (error)
                     return callback('failed to download news.');
-                var r = '',
-                    preview = [];
+                var r = '';
                 data = JSON.parse(data);
-                for (var i = 0; i < 3; i++) {
-                    preview[i] = shorten(data.items[i].caption.text, 50);
+                for (var i = 0; i < 5; i++) 
                     r += `<li class="padding-hor-16" style="min-height:6rem;">
                             <img class="left circle margin-right" src="${data.items[i].images.thumbnail.url}" style="width:60px" />
                             ${shorten(data.items[i].caption.text.replace(/\n/g, '<br />'), 200)} 
                             <a href="${data.items[i].link}"> Read more</a>.
                           </li>`;
-                }
+                
                 var db = requireNew('./database');
-                db.news = {
-                    preview,
-                    file: r + `<li><center>More news on <a href="http://instagr.am/takapuna.grapevine">Instagram</a></center></li>`
-                };
-                fs.writeFile(
-                    './database.json',
-                    JSON.stringify(db, null, 4).replace(/\n +/g, ''),
-                    err => callback(err ? 'failed to save news' : 'saved news')
-                );
+                db.news = r;
+                fs.writeFile('./database.json', JSON.stringify(db, null, 4).replace(/\n +/g, ''), err => callback(err ? 'failed to save news' : 'saved news'));
             });
-        }catch(err){
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    blog: callback => {
+        try { /*.split('\r\n\r\n\r\n\r\n\r\n \r\n \r\n\r\n\t\t\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\r\n')[0]*/
+            request({
+                uri: 'http://takapuna.school.nz/news/latest-news/',
+                method: 'GET',
+                strictSSL: false
+            }, (error, response, data) => {
+                if (error)
+                    return void console.log(error) || callback('failed to download blog.');
+                var r = data.split('<div class="article">');
+                r.shift();
+                for (var i = 0; i < r.length; i++) 
+                    r[i] = r[i].replace(/<\/h1>/g, '!@#').replace(/<h1>/g, '$%^').replace(/<\/?[^>]+(>|$)/g, '');
+                r.length = 6;
+                
+                var db = requireNew('./database');
+                db.blog = r.join('</li><li>').replace(/\!\@\#/g, '</strong> - ').replace(/\$\%\^/g, '<strong>').replace(/\>\>/g, '<a href="http://takapuna.school.nz/news/latest-news/">[Read more]</a>');
+                fs.writeFile('./database.json', JSON.stringify(db, null, 4).replace(/\n +/g, ''), err => callback(err ? 'failed to save blog' : 'saved blog'));
+            });
+        } catch (err) {
             console.log(err);
         }
     }

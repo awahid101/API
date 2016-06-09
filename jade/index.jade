@@ -16,13 +16,13 @@ html
     meta(property='og:title', content='TGS App')
     meta(property='og:type', content='website')
     meta(property='og:url', content='http://kyle2.azurewebsites.net')
-    meta(property='og:image', content='./img/favicon.png')
+    meta(property='og:image', content='./img/large.png')
     
     meta(name='format-detection', content='telephone=no')
     meta(name='apple-mobile-web-app-title', content='TGS App')
     meta(name='apple-mobile-web-app-capable', content='yes')
     meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
-    link(rel='apple-touch-icon', href='./img/favicon.png')
+    link(rel='apple-touch-icon', href='./img/large.png')
     link(rel='apple-touch-startup-image', href='./img/startup.jpg')
     meta(name='theme-color', content='#2196f3')
     meta(name='mobile-web-app-capable', content='yes')
@@ -44,7 +44,7 @@ html
       li.hide-small
         a(href="#/news", onclick="_(2)") News
       li.hide-small
-        a(href="#/about", onclick="_(3)") About
+        a(href="#/blog", onclick="_(3)") Blog
 
     #nav.hide.hide-large.hide-medium
       ul.navbar.left-align.large.teal
@@ -53,7 +53,7 @@ html
         li
           a(href="#/news", onclick="$(2)") News
         li
-          a(href="#/about", onclick="$(3)") About
+          a(href="#/blog", onclick="$(3)") Blog
     .container
       .pages
         #0
@@ -68,10 +68,9 @@ html
           h2 School News
           ul.ul.card-4 !{news}
         #3(hidden)
-          h2 About
-          p
-            | The TGS App is not official. 
-            a(href="https://github.com/tgs-app/api") View on GitHub.
+          h2 Blog
+          ul.ul.card-4
+            li !{blog}
   footer.bottom.teal.container
     center
       small

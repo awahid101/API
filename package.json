@@ -1,6 +1,6 @@
 {
   "name": "tgsapp",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "TGS App & Skype Bot - powered by http://botframework.com",
   "main": "server.js",
   "dependencies": {
