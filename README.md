@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/TGS-App/API.svg?branch=master)](https://travis-ci.org/TGS-App/API)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](LICENSE)
 [![Last Sync](http://kyle2.azurewebsites.net/badge.svg?i=0)](http://tgs.kyle.cf)
-[![Notices](http://kyle2.azurewebsites.net/badge.svg?i=1)](http://tgs.kyle.cf)
-[![News](http://kyle2.azurewebsites.net/badge.svg?i=2)](http://tgs.kyle.cf)
-[![Blog](http://kyle2.azurewebsites.net/badge.svg?i=3)](http://tgs.kyle.cf)
+[![gDrive](http://kyle2.azurewebsites.net/badge.svg?i=1)](http://tgs.kyle.cf)
+[![IG/FB](http://kyle2.azurewebsites.net/badge.svg?i=2)](http://tgs.kyle.cf)
+[![KAMAR](http://kyle2.azurewebsites.net/badge.svg?i=3)](http://tgs.kyle.cf)
 
 :school: Web-App & Skype Bot for TGS Daily Notices, news and blog.   
 
@@ -23,3 +23,7 @@ http://{{base_url}}/api/v1/?q={{item}}
 ```   
 
 where `{{item}}` is either `notices`, `news` or `blog`.
+
+# KAMAR API
+
+Read the [KAMAR API Docs](KAMAR)

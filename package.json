@@ -1,16 +1,16 @@
 {
   "name": "tgsapp",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "TGS App & Skype Bot - powered by http://botframework.com",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "botbuilder": "^0.10.2",
     "chalk": "^1.1.3",
     "express": "^4.13.4",
     "pug": "^0.1.0",
     "request": "^2.72.0",
-    "require-new": "^1.1.0",
-    "tough-cookie-filestore": "0.0.1"
+    "require-new": "^1.1.0"
   },
   "scripts": {
     "test": "eslint *.js && echo Lint passed.",

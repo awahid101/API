@@ -1,3 +1,4 @@
 node_modules/*
 **/vendor/*.js
 sha256.js
+kamar/kamar-crawl.js

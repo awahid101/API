@@ -4,10 +4,10 @@ const secrets = process.env.AZURE ? {} : require('./secrets'),
       fs = require('fs');
 
 try {
-    require('./cookies');
+    require('./database');
 } catch (e) {
-    console.error(chalk.red(e));
-    fs.writeFile('./cookies.json', '{}');
+    console.error(chalk.cyan.bold('[util] '), chalk.red(e));
+    fs.writeFile('./database.json', '{}');
 }
 
 module.exports = {
@@ -35,6 +35,5 @@ module.exports = {
             if (s[i] != " ")
                 s[i] = chalk.bold[r[i % r.length]](s[i]);
         return s.join(''); 
-    },
-    log: str => void console.log(str) || str
+    }
 };
