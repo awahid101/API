@@ -1,0 +1,15 @@
+CACHE MANIFEST
+# version 5.2.[-dev]
+
+/
+tgs.css
+/img/favicon.ico
+https://translate.google.com/translate_a/element.js?cb=google
+https://translate.googleapis.com/translate_static/css/translateelement.css
+https://translate.googleapis.com/translate_static/js/element/main.js
+https://translate.googleapis.com/translate_static/js/element/34/element_main.js
+https://www.gstatic.com/images/branding/product/1x/translate_24dp.png
+
+NETWORK:
+/kamar/login
+*

@@ -1,5 +1,5 @@
 doctype html
-html
+html(manifest="manifest.appcache")
   head
     title TGS App &middot; Home
     include head.jade
@@ -26,25 +26,30 @@ html
           a(href="#/news", onclick="$(2)") News
         li
           a(href="#/blog", onclick="$(3)") Blog
-        li.hide-small
-          a(href="#/timetable", onclick="_(4)") Timetable
+        li
+          a(href="#/timetable", onclick="$(4)") Timetable
     .container
       .pages
+        section
+          #google
         #0
-          p.
-            This is the TGS App. !{'<br>'}
-            Version !{version}.
+          p
+            | This is the TGS App.
+            br
+            | Version !{version}.
         #1(hidden)
           h2 Daily Notices
-          .google
-          ul.ul.hoverable !{notices}
+          section
+            article !{notices}
         #2(hidden)
           h2 School News
-          ul.ul.card-4 !{news}
+          section
+            ul.ul.card-4 !{news}
         #3(hidden)
           h2 Blog
-          ul.ul.card-4
-            li !{blog}
+          section
+            ul.ul.card-4
+              li !{blog}
         #4(hidden)
           h2 Timetable
           form.container.card-4.light-grey(action="./kamar/login", method="POST")
@@ -56,6 +61,7 @@ html
               label KAMAR Password
               input.input.border.round-xxlarge(name="password", type="password")
             p
+              //remember for next time
               input.btn.blue-grey(type="submit", value="Login") 
   footer.bottom.teal.container
     center
@@ -65,9 +71,9 @@ html
         a(href="http://github.com/k-yle") Contact 
         | | 
         a(href="http://github.com/tgs-app") View on Github
-    script(src="//translate.google.com/translate_a/element.js?cb=g", defer)
+    script(src="//translate.google.com/translate_a/element.js?cb=google", defer)
     script.
-      function g(){new google.translate.TranslateElement({pageLanguage:'en'},'google');};
+      function google(){new google.translate.TranslateElement({pageLanguage:'en'/*, layout: google.translate.TranslateElement.InlineLayout.SIMPLE*/},'google');};
       function d(id){return document.getElementById(id);};
       function _(n){d(0).hidden=!0;d(1).hidden=!0;d(2).hidden=!0;d(3).hidden=!0;d(4).hidden=!0;d(n).hidden=!1;};
       function $(n){var x = d('nav');x.className.indexOf('show')==-1?x.className+=' show':x.className=x.className.replace(' show', '');n!=null&&_(n);};

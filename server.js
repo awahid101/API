@@ -14,7 +14,7 @@ const requireNew = require('require-new'),
 
       lan = util.argv(/--?l(an)?/),
       port = lan ? 80 : (process.env.OPENSHIFT_NODEJS_PORT || process.env.port || 3978),
-      ip = lan ? (secrets.IP || `192.168.1.${lan}`) : (process.env.OPENSHIFT_NODEJS_IP ||  '127.0.0.1');
+      ip = lan ? (lan !== true ? lan : secrets.IP) : (process.env.OPENSHIFT_NODEJS_IP ||  '127.0.0.1');
 
 var bot = new builder.BotConnectorBot({ 
     appId: process.env.BOTFRAMEWORK_APPID || secrets.BOTFRAMEWORK_APPID, 
@@ -34,13 +34,13 @@ dialog.matches('(^!|TGS(-| )*Bot).*(daily )?notices?', session => session.send(`
     .substring(50, 150)
     .replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '')}...\nView more on [the website](http://tgs.kyle.cf)`));
     
-dialog.matches('.*(^!|TGS(-| )*Bot).*', session => session.send("I don't understand that 😕" || "Something went wrong (bug)"));
+dialog.matches('.*(^!|TGS(-| )*Bot).*', session => session.send("Something went wrong (bug)"));
     
 var app = express();
 
 app.use((req, res, next) => next(void (process.env.AZURE && process.stdout.write(`${chalk[req.method == 'GET' ? 'green' : 'yellow'].bold(req.method)}\t${chalk.grey(req.url)}`))));
 app.get('/', (req, res) => res.send(jade.compileFile('jade/index.jade', {
-    pretty: port == 3978
+    pretty: !process.env.isAzure
 })({
     news: requireNew('./database').news + `<li><center>More news on <a href="http://instagr.am/takapuna.grapevine">Instagram</a></center></li>`,
     blog: requireNew('./database').blog,
@@ -154,6 +154,8 @@ app.get('/download', (req, res) => {
     download.notices(x => download.news(y => download.blog(z => util.report(x, y, z))));
     res.send('downloading...');
 });
+app.get('/news/:item', (req, res) => res.redirect(`http://takapuna.school.nz/news/${req.params.item}`));
+app.get('/manifest.appcache', (req, res) => void res.contentType('text/cache-manifest') || res.send(fs.readFileSync('jade/manifest.appcache').toString().replace('[dev]', Math.random())));
 app.post('/api/messages', bot.verifyBotFramework(), bot.listen());
 app.post('/kamar/login', urlencodedParser, KAMAR.login);
 app.get('/kamar/timetable', urlencodedParser, KAMAR.TT);
@@ -162,4 +164,4 @@ app.get('/database.json', (req, res) => res.send(requireNew('./database')));
 app.use(express.static('public'));
 app.use((req, res, next) => res.status(404).send('HTTP 404'));
 
-app.listen(port, ip, () => console.log(`Server running on port ${chalk.cyan(port)}`));
+app.listen(port, ip, () => console.log(`Server running on ${chalk.cyan(ip)}:${chalk.cyan.bold(port)}`));

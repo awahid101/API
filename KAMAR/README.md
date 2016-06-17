@@ -1,9 +1,10 @@
 # KAMAR API docs (unofficial)
 
-POST to `/api/api.php` with `application/x-www-form-urlencoded`.     
+:school_satchel: POST to `/api/api.php` with `application/x-www-form-urlencoded`.     
 
 UserAgent: `KAMAR/1455 CFNetwork/758.4.3 Darwin/15.5.0`
 
+To convert responses to JSON, see [this](https://github.com/TGS-App/API/blob/42bd30754cbaed9d0863d36025fb3c21ce370697/jade/timetable.jade#L41-L77) function.
 # 1. Get `ServerSettings` (optional)
 
 

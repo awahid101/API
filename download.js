@@ -42,11 +42,7 @@ module.exports = {
                 .replace(/\n/g,              '<br/>')
                 .replace(/[^\x00-\x7F]/g,    '<font color="red">?</font>')
                 .replace(/<br\/><hr\/>/g,    '<hr\/>');
-            fs.writeFile(
-                `./database.json`,
-                JSON.stringify(db, null, '\t'),
-                err => callback(err ? 'failed to save notices' : 'saved notices')
-            );
+            fs.writeFile(`./database.json`, JSON.stringify(db, null, '\t'), err => callback(err ? 'failed to save notices' : 'saved notices'));
         });
     },
     news: callback => {
@@ -86,11 +82,11 @@ module.exports = {
                 var r = data.split('<div class="article">');
                 r.shift();
                 for (var i = 0; i < r.length; i++) 
-                    r[i] = r[i].replace(/<\/h1>/g, '!@#').replace(/<h1>/g, '$%^').replace(/<\/?[^>]+(>|$)/g, '');
+                    r[i] = r[i].replace(/<\/h1>/g, '!@#').replace(/<h1>/g, '$%^').replace(/<\/?[^>|^a]+(>|$)/mgi, '');
                 r.length = 6;
                 
                 var db = requireNew('./database');
-                db.blog = r.join('</li><li>').replace(/\!\@\#/g, '</strong> - ').replace(/\$\%\^/g, '<strong>').replace(/\>\>/g, '<a href="http://takapuna.school.nz/news/latest-news/">[Read more]</a>');
+                db.blog = r.join('</li><li>').replace(/\!\@\#/g, '</strong> - ').replace(/\$\%\^/g, '<strong>');
                 fs.writeFile('./database.json', JSON.stringify(db, null, 4).replace(/\n +/g, ''), err => callback(err ? 'failed to save blog' : 'saved blog'));
             });
         } catch (err) {
