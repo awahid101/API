@@ -155,7 +155,13 @@ app.get('/download', (req, res) => {
     res.send('downloading...');
 });
 app.get('/news/:item', (req, res) => res.redirect(`http://takapuna.school.nz/news/${req.params.item}`));
-app.get('/manifest.appcache', (req, res) => void res.contentType('text/cache-manifest') || res.send(fs.readFileSync('jade/manifest.appcache').toString().replace('[dev]', Math.random())));
+
+app.get('/manifest.appcache', (req, res) => {
+    const dd = (new Date()).toISOString().split('T');
+    res.contentType('text/cache-manifest');
+    res.send(fs.readFileSync('jade/manifest.appcache').toString().replace('[date]', dd[0]).replace('[minor]', process.env.isAzure ? 0 : dd[1].split(':')[1]));
+});
+
 app.post('/api/messages', bot.verifyBotFramework(), bot.listen());
 app.post('/kamar/login', urlencodedParser, KAMAR.login);
 app.get('/kamar/timetable', urlencodedParser, KAMAR.TT);
