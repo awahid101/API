@@ -65,8 +65,7 @@ app.post('/api/api.php', urlencodedParser, (req, res) => {
     else if (req.body.Command == 'Logon') 
         res.send(fs.readFileSync('KAMAR/Examples/Logon.xml').toString().replace('$$ID$$', req.body.Username));
     else 
-        res.send('u wot m8?');
-    
+        res.send('u wot m8?');  
 });
 
 app.get('/badges?(.svg)?', (req, res) => {
@@ -163,8 +162,12 @@ app.get('/manifest.appcache', (req, res) => {
 });
 
 app.post('/api/messages', bot.verifyBotFramework(), bot.listen());
-app.post('/kamar/login', urlencodedParser, KAMAR.login);
-app.get('/kamar/timetable', urlencodedParser, KAMAR.TT);
+
+app.get('/kamar/', urlencodedParser, KAMAR.index);
+    app.post('/kamar/login', urlencodedParser, KAMAR.login);
+    app.get('/kamar/timetable', urlencodedParser, KAMAR.TT);
+    app.get('/kamar/details', urlencodedParser, KAMAR.details);
+
 app.get('/database.json', (req, res) => res.send(requireNew('./database')));
 
 app.use(express.static('public'));

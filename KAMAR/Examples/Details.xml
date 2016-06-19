@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StudentDetailsResults apiversion="2.4.2">
+    <FileName>StudentDetails_15201_</FileName>
+    <ErrorCode>0</ErrorCode>
+    <NumberRecords>1</NumberRecords>
+    <Students>
+        <Student index="1">
+            <StudentID>15201</StudentID>
+            <FirstName>Jon</FirstName>
+            <ForeNames>Jon Orlando</ForeNames>
+            <LastName>Doe</LastName>
+            <FirstNameLegal>Jonathan</FirstNameLegal>
+            <ForeNamesLegal>Jonathan Orlando</ForeNamesLegal>
+            <LastNameLegal>Doe</LastNameLegal>
+            <Gender>Male</Gender>
+            <Ethnicity>South-East Asian</Ethnicity>
+            <DateBirth>01 Jan 1970</DateBirth>
+            <Age>45 years, 6 month</Age>
+            <NSN>0123456789</NSN>
+            <StudentEmail>Jon.Doe@takapunagrammar.school.nz</StudentEmail>
+            <StudentSchoolEmail></StudentSchoolEmail>
+            <HomePhone>0064 (0) 9 444 5555</HomePhone>
+            <HomeAddress>12 Lake Road
+Papakura
+Auckland    0423</HomeAddress>
+            <ParentTitle>Dr Q Evans</ParentTitle>
+            <ParentSalutation>Dr Evans</ParentSalutation>
+            <ParentEmail>doe-family@example.co.nz</ParentEmail>
+            <HomePhoneB>0064 (0) 9 444 5555</HomePhoneB>
+            <HomeAddressB>2350 Great South Road
+Newmarket
+Auckland    0723</HomeAddressB>
+            <ParentTitleB>Mr S Doe</ParentTitleB>
+            <ParentSalutationB>Mr Doe</ParentSalutationB>
+            <ParentEmailB>s.doe@googlemail.de</ParentEmailB>
+            <DoctorName></DoctorName>
+            <DoctorPhone></DoctorPhone>
+            <DoctorAddress></DoctorAddress>
+            <DentistName></DentistName>
+            <DentistPhone></DentistPhone>
+            <DentistAddress></DentistAddress>
+            <AllowedPanadol>Y</AllowedPanadol>
+            <AllowedIbuprofen>Y</AllowedIbuprofen>
+            <HealthFlag>N</HealthFlag>
+            <Medical></Medical>
+            <Reactions></Reactions>
+            <Vaccinations></Vaccinations>
+            <SpecialCircumstances></SpecialCircumstances>
+            <GeneralNotes></GeneralNotes>
+            <HealthNotes></HealthNotes>
+            <MotherRelation>Mother</MotherRelation>
+            <MotherName>Dr Q Evans</MotherName>
+            <MotherStatus></MotherStatus>
+            <MotherEmail>q.evans@google.co.nz</MotherEmail>
+            <MotherPhoneHome>444 7777</MotherPhoneHome>
+            <MotherPhoneCell>0221 324 576</MotherPhoneCell>
+            <MotherPhoneWork>444 6666</MotherPhoneWork>
+            <MotherPhoneExtn></MotherPhoneExtn>
+            <MotherOccupation>Aerospace Mechanic</MotherOccupation>
+            <MotherWorkAddress>Arways New Zealand</MotherWorkAddress>
+            <MotherNotes></MotherNotes>
+            <FatherRelation></FatherRelation>
+            <FatherName></FatherName>
+            <FatherStatus></FatherStatus>
+            <FatherEmail></FatherEmail>
+            <FatherPhoneHome></FatherPhoneHome>
+            <FatherPhoneCell></FatherPhoneCell>
+            <FatherPhoneWork></FatherPhoneWork>
+            <FatherPhoneExtn></FatherPhoneExtn>
+            <FatherOccupation></FatherOccupation>
+            <FatherWorkAddress></FatherWorkAddress>
+            <FatherOccupation>Electro-Mechanic</FatherOccupation>
+            <FatherrWorkAddress>SAMSUNG Electro Mechanics New Zealand co. ltd.</FatherWorkAddress>
+            <FatherNotes></FatherNotes>
+            <EmergencyName>Prof. Alice Smith</EmergencyName>
+            <EmergencyPhoneHome></EmergencyPhoneHome>
+            <EmergencyPhoneCell>0064 (0) 22 334 4556</EmergencyPhoneCell>
+            <EmergencyPhoneWork></EmergencyPhoneWork>
+            <EmergencyPhoneExtn></EmergencyPhoneExtn>
+            <EmergencyNotes></EmergencyNotes>
+        </Student>
+    </Students>
+</StudentDetailsResults>

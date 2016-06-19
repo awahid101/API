@@ -1,0 +1,16 @@
+extends ./layout.jade
+
+block title
+  title TGS App &middot; KAMAR  &middot; Home
+
+block name
+  | KAMAR
+
+block content
+  ul
+    each item in ['Timetable', 'Details']
+      li: a(href="#", onclick="_$(this.innerHTML)")= item
+  script.
+    function _$(item) {
+      window.location = item + '/' + window.location.search;
+    }

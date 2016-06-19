@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StudentAttendanceResults apiversion="2.4.2">
+    <FileName>StudentAttendance_0_2016TT_15201</FileName>
+    <ErrorCode>0</ErrorCode>
+    <NumberRecords>19</NumberRecords>
+    <Weeks>
+        <Week index="1">
+            <WeekStart>2016-01-25</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="2">
+            <WeekStart>2016-02-01</WeekStart>
+            <Days>
+                <Day index="1"></Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="3">
+            <WeekStart>2016-02-08</WeekStart>
+            <Days>
+                <Day index="1"></Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="4">
+            <WeekStart>2016-02-15</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">JJJ.JJJ...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="5">
+            <WeekStart>2016-02-22</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PP..PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PP....</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="6">
+            <WeekStart>2016-02-29</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="7">
+            <WeekStart>2016-03-07</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="8">
+            <WeekStart>2016-03-14</WeekStart>
+            <Days>
+                <Day index="1">..P.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="9">
+            <WeekStart>2016-03-21</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PJJ...</Day>
+                <Day index="5"></Day>
+            </Days>
+        </Week>
+        <Week index="10">
+            <WeekStart>2016-03-28</WeekStart>
+            <Days>
+                <Day index="1"></Day>
+                <Day index="2"></Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="11">
+            <WeekStart>2016-04-04</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="12">
+            <WeekStart>2016-04-11</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="13">
+            <WeekStart>2016-05-02</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="14">
+            <WeekStart>2016-05-09</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">JJJ.JJJ...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="15">
+            <WeekStart>2016-05-16</WeekStart>
+            <Days>
+                <Day index="1">PPP.P.P...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..P.PPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="16">
+            <WeekStart>2016-05-23</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP..PP...</Day>
+            </Days>
+        </Week>
+        <Week index="17">
+            <WeekStart>2016-05-30</WeekStart>
+            <Days>
+                <Day index="1">.PP.P.P...</Day>
+                <Day index="2">.PP.PPP...</Day>
+                <Day index="3">..P.PPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5"></Day>
+            </Days>
+        </Week>
+        <Week index="18">
+            <WeekStart>2016-06-06</WeekStart>
+            <Days>
+                <Day index="1"></Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..PPPPP...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+        <Week index="19">
+            <WeekStart>2016-06-13</WeekStart>
+            <Days>
+                <Day index="1">PPP.PPP...</Day>
+                <Day index="2">PPP.PPP...</Day>
+                <Day index="3">..P.P.P...</Day>
+                <Day index="4">PPP.PPP...</Day>
+                <Day index="5">PPP.PPP...</Day>
+            </Days>
+        </Week>
+    </Weeks>
+</StudentAttendanceResults>

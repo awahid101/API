@@ -1,0 +1,37 @@
+extends ./layout.jade
+
+block title
+  title TGS App &middot; KAMAR  &middot; Student Details
+
+block name
+  | Details
+
+block content
+  #XML(hidden)!= XML
+  form(action="https://portal.takapuna.school.nz/api/img.php", method="GET", target="_blank")
+    input(type="hidden", name="Key", value=Key)
+    input(type="hidden", name="Stuid", value=ID)
+    .details(style="overflow-x:scroll")
+       table.table.table-all
+         thead: tr
+           th Name
+           th Value
+         tbody#details
+  script.
+    var _ = xmlToJson($('XML')).STUDENTDETAILSRESULTS.STUDENTS.STUDENT;
+
+    var details = {
+      "Full Name": _.FIRSTNAME['#text'] + ' <a href="javascript:alert(\'' + _.FORENAMES['#text'] + ' ' + _.LASTNAME['#text'] + '\');">...</a> ' + _.LASTNAME['#text'],
+      "Student ID": _.STUDENTID['#text'] + ' <a href="mailto:' + _.STUDENTID['#text'] + '@tgs.school.nz"><small>@tgs.school.nz</small></a>',
+      "Gender": _.GENDER['#text'],
+      "Ethnicity": _.ETHNICITY['#text'],
+      "ID Photo": "<input type='submit' value='View' />",
+      "Phone": '<a href="tel:' + _.HOMEPHONE['#text'] + '">' + _.HOMEPHONE['#text'] + '</a>',
+      "Home Address": '<a href="http://www.bing.com/maps/?q=' + encodeURIComponent(_.HOMEADDRESS['#text']) + '" target="_blank">' + _.HOMEADDRESS['#text'] + '</a>',
+      "Birthday": _.DATEBIRTH['#text'] + ' (' +  _.AGE['#text'] + ')',
+      "Emergency Contact": _.EMERGENCYNAME['#text'] + ' (<a href="tel:' + _.EMERGENCYPHONECELL['#text'] + '">' + _.EMERGENCYPHONECELL['#text'] + '</a>)'
+    };
+    var HTML = '';
+    for (var item in details) 
+      HTML += `<tr><td>${item}</td><td>${details[item]}</td></tr>`;
+    $('details').innerHTML = HTML;
