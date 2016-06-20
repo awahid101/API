@@ -4,3 +4,5 @@ web.config
 node_modules
 database.json
 SECRETS
+.snyk
+*.snyk
