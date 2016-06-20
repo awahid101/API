@@ -38,15 +38,15 @@ dialog.matches('.*(^!|TGS(-| )*Bot).*', session => session.send("Something went 
     
 var app = express();
 
-app.use((req, res, next) => next(void (process.env.AZURE && process.stdout.write(`${chalk[req.method == 'GET' ? 'green' : 'yellow'].bold(req.method)}\t${chalk.grey(req.url)}`))));
-app.get('/', (req, res) => res.send(jade.compileFile('jade/index.jade', {
+app.use((req, res, next) => next(void (!process.env.AZURE && console.log(`${chalk[req.method == 'GET' ? 'green' : 'yellow'].bold(req.method)}\t${chalk.grey(req.url)}`))));
+app.get('/', (req, res) => void console.time('index') || void res.send(jade.compileFile('jade/index.jade', {
     pretty: !process.env.isAzure
 })({
     news: requireNew('./database').news + `<li><center>More news on <a href="http://instagr.am/takapuna.grapevine">Instagram</a></center></li>`,
     blog: requireNew('./database').blog,
     version: requireNew('./package').version,
     notices: requireNew('./database').notices
-})));
+})) || console.timeEnd('index'));
 app.get('/api/v1/', (req, res) => {
     try {
         res.jsonp(requireNew('./database')[req.query.q.toString()]);
@@ -75,17 +75,13 @@ app.get('/badges?(.svg)?', (req, res) => {
             value: (date => date.getMinutes() - 3)(new Date()) + 'min',
             color: '#1e90ff'
         }, {
-            name: 'gDrive',
+            name: 'Spider',
             value: '✔', //if you can see this then it must be up to date...
             color: '#4dbd33'
         }, {
-            name: 'IG/FB',
-            value: '✔',
-            color: '#4dbd33'
-        }, {
             name: 'KAMAR',
-            value: '🔧',
-            color: '#cf25cf'
+            value: 'stable', //if you get a 200 here then it must be OK...
+            color: '#FFA824'
         }];
         res.contentType('image/svg+xml');
         res.send(jade.compileFile('jade/badges.jade')(stuff[Number(req.query.i.toString()) || 0]));

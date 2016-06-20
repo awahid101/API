@@ -3,10 +3,8 @@ extends ./layout.jade
 block title
   title TGS App &middot; KAMAR  &middot; Timetable
 
-block name
-  | Timetable
-
 block content
+  h2 Timetable - <small>!{ID}</small>
   #XML(hidden)!=XML
   .timetable(style="overflow-x:scroll")
     table.table.table-all

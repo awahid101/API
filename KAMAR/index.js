@@ -2,8 +2,10 @@ const request = require('request'),
       chalk = require('chalk'),
       jade = require('pug'),
       fs = require('fs'),
-      portal = 'https://portal.takapuna.school.nz/api/api.php'; //tgs-kamar.local
-console.log('//speedtest TimeEnd');
+      portal = 'https://portal.takapuna.school.nz/api/api.php', //tgs-kamar.local
+
+      UserAgent = 'Katal/5.2 (Cargo 3.69; Andriod; Linux;) RedDog/14 KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0';
+
 module.exports = {
     login: (req, res) => {
         console.time('kamar-login');
@@ -17,6 +19,9 @@ module.exports = {
                     Key: 'vtku',
                     Username: req.body.username,
                     Password: req.body.password
+                },
+                headers: {
+                    'User-Agent': UserAgent
                 }
             }, (error, response, body) => {
                 try {
@@ -34,8 +39,9 @@ module.exports = {
             res.status(418).send('Error 418 during login');
         }
     },
-    index: (req, res) => res.send(jade.compileFile('jade/kamar/index.jade')({ ID: req.query.username, qp: req.url.split('?')[1] || '' })),
+    index: (req, res) => res.send(jade.compileFile('jade/kamar/index.jade')({ Key: req.query.key, ID: req.query.username, qp: req.url.split('?')[1] || '' })),
     TT: (req, res) => {
+        console.time('kamar-timetable');
         try {
             request({
                 url: portal,
@@ -46,18 +52,23 @@ module.exports = {
                     Key: req.query.key,
                     FileStudentID: req.query.username,
                     Grid: "2016TT"
+                },
+                headers: {
+                    'User-Agent': UserAgent
                 }
-            }, (error, response, body) => res.send(jade.compileFile('jade/kamar/timetable.jade')({
+            }, (error, response, body) => void res.send(jade.compileFile('jade/kamar/timetable.jade')({
                 XML: body,
                 ID:  req.query.username,
                 qp: req.url.split('?')[1] || '' 
-            })));
+            })) || console.timeEnd('kamar-timetable'));
         } catch (err) {
             console.warn(chak.yellow(err));
             res.status(400).send('Error 400');
+            console.timeEnd('kamar-timetable');
         }
     },
     details: (req, res) => {
+        console.time('kamar-details');
         try {
             request({
                 url: portal,
@@ -68,18 +79,22 @@ module.exports = {
                     Key: req.query.key,
                     FileStudentID: req.query.username,
                     PastoralNotes: ''
+                },
+                headers: {
+                    'User-Agent': UserAgent
                 }
-            }, (error, response, body) => res.send(jade.compileFile('jade/kamar/details.jade', {
+            }, (error, response, body) => void res.send(jade.compileFile('jade/kamar/details.jade', {
                 pretty: true
             })({
                 XML: body,
                 ID:  req.query.username,
                 Key: req.query.key || '',
                 qp: req.url.split('?')[1] || '' 
-            })));
+            })) || console.timeEnd('kamar-details'));
         } catch (err) {
             console.warn(chak.yellow(err));
             res.status(400).send('Error 400');
+            console.timeEnd('kamar-details');
         }
     }
 };

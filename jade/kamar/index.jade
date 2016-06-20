@@ -7,9 +7,14 @@ block name
   | KAMAR
 
 block content
-  ul
-    each item in ['Timetable', 'Details']
-      li: a(href="#", onclick="_$(this.innerHTML)")= item
+  table(style={ "max-width": "300px;" }): tr
+    td
+      img.round-xlarge(src='https://portal.takapuna.school.nz/api/img.php?Key='+Key+'&Stuid='+ID, style="width:100")
+    td
+      h3= ID
+      ul
+        each item in ['Timetable', 'Details']
+          li: a(href="#", onclick="_$(this.innerHTML)")= item
   script.
     function _$(item) {
       window.location = item + '/' + window.location.search;

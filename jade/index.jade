@@ -17,7 +17,9 @@ html(manifest="manifest.appcache")
       li.hide-small
         a(href="#/blog", onclick="_(3)") Blog
       li.hide-small
-        a(href="#/timetable", onclick="_(4)") Timetable
+        a(href="#/login", onclick="_(4)") Timetable
+      li.hide-small
+        a(href="#/login", onclick="_(4)") Details
     #nav.hide.hide-large.hide-medium
       ul.navbar.left-align.large.teal
         li
@@ -27,7 +29,7 @@ html(manifest="manifest.appcache")
         li
           a(href="#/blog", onclick="$(3)") Blog
         li
-          a(href="#/timetable", onclick="$(4)") Timetable
+          a(href="#/login", onclick="$(4)") More
     .container
       .pages
         section
@@ -51,9 +53,9 @@ html(manifest="manifest.appcache")
             ul.ul.card-4
               li !{blog}
         #4(hidden)
-          h2 Timetable
+          h2 Login
           form.container.card-4.light-grey(action="./kamar/login", method="POST")
-            p Please login with KAMAR
+            p Please login with KAMAR to view this content
             p
               label Student ID
               input.input.border.round-xxlarge(name="username", type="tel", placeholder="15999")
