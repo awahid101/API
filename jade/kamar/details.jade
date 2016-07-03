@@ -28,10 +28,11 @@ block content
       "Ethnicity": _.ETHNICITY['#text'],
       "ID Photo": "<a href='https://portal.takapuna.school.nz/api/img.php?Key=" + $('Key').value + "&Stuid="+_.STUDENTID['#text']+"' target='_blank'>View</a>",
       "Phone": '<a href="tel:' + _.HOMEPHONE['#text'] + '">' + _.HOMEPHONE['#text'] + '</a>',
-      "Home Address": '<a href="http://www.bing.com/maps/?q=' + encodeURIComponent(_.HOMEADDRESS['#text']) + '" target="_blank">' + _.HOMEADDRESS['#text'] + '</a>',
+      "Home Address": '<a href="http://www.bing.com/maps/?q=' + encodeURIComponent(_.HOMEADDRESS['#text'].replace(/\n/g, ', ')) + '" target="_blank"><div id="map">' + _.HOMEADDRESS['#text'] + '</div></a>',
       "Birthday": _.DATEBIRTH['#text'] + ' (' +  _.AGE['#text'] + ')',
       "Emergency Contact": _.EMERGENCYNAME['#text'] + ' (<a href="tel:' + _.EMERGENCYPHONECELL['#text'] + '">' + _.EMERGENCYPHONECELL['#text'] + '</a>)'
     };
+    document.write('<script src="./map.js?q=' + _.HOMEADDRESS['#text'].replace(/\n/g, ', ') + '&callback=map"><\/script>');
     var HTML = '';
     for (var item in details) 
       HTML += `<tr><td>${item}</td><td>${details[item]}</td></tr>`;
@@ -44,7 +45,7 @@ block content
        +'\nORG:Takapuna Grammar School Student #'+_.STUDENTID['#text']
        +'\nGENDER:'+_.GENDER['#text']
        +'\nTITLE:'+_.ETHNICITY['#text']
-       +'\nPHOTO;MEDIATYPE=image/pjpeg:https://portal.takapuna.school.nz/api/img.php?Key='+$('Key').value+'&Stuid='+_.STUDENTID['#text']
+       +'\nPHOTO;MEDIATYPE=image/jpeg:https://portal.takapuna.school.nz/api/img.php?Key='+$('Key').value+'&Stuid='+_.STUDENTID['#text']
        +'\nTEL;TYPE=home,voice;home=uri:'+_.HOMEPHONE['#text']
        +'\nADR;TYPE=home;home="'+_.HOMEADDRESS['#text'].replace(/\n/g, '\\n')+'":;;'+_.HOMEADDRESS['#text'].replace(/\n/g, '\\n')
        +'\nEMAIL:'+_.STUDENTID['#text']+'@tgs.school.nz'
@@ -52,3 +53,26 @@ block content
        +'\nBDAY:'+_.DATEBIRTH['#text'] //doesn't show up, needs to be in the format of `DDMMYYYY`
        +'\nNOTE:Emergency Contact: '+_.EMERGENCYNAME['#text']+' ('+ _.EMERGENCYPHONECELL['#text']+')\nEND:VCARD');
     }());
+    function map(coords) {
+      var formify = function (data) {
+        var params = [];
+        for (var name in data) 
+          params.push(name + '=' + encodeURIComponent(data[name]));
+        return params.join('&');
+      };
+      $('map').innerHTML = '<iframe width="300" height="200" frameborder="0" src="https://www.bing.com/maps/embed/viewer.aspx?' + formify({
+        v: 3,
+        cp: coords.lat + '~' + coords.lng,
+        lvl: 16,
+        w: 300,
+        h: 200,
+        sty: 'r',
+        typ: 's',
+        pp: '',
+        ps: '',
+        dir: 0,
+        mkt: 'en-us',
+        src: 'SHELL',
+        form: 'BMEMJS'
+      }) + '"></iframe>';
+    }

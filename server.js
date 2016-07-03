@@ -10,11 +10,7 @@ const requireNew = require('require-new'),
       KAMAR = require('./kamar'),
       chalk = require('chalk'),
       jade = require('pug'),
-      fs = require('fs'),
-
-      lan = util.argv(/--?l(an)?/),
-      port = lan ? 80 : (process.env.OPENSHIFT_NODEJS_PORT || process.env.port || 3978),
-      ip = lan ? (lan !== true ? lan : secrets.IP) : (process.env.OPENSHIFT_NODEJS_IP ||  '127.0.0.1');
+      fs = require('fs');
 
 var bot = new builder.BotConnectorBot({ 
     appId: process.env.BOTFRAMEWORK_APPID || secrets.BOTFRAMEWORK_APPID, 
@@ -93,52 +89,6 @@ app.get('/badges?(.svg)?', (req, res) => {
         }));
     }
 });//\033[0G
-app.get('/scipad/:book', (req, res) => { /*
-    
-    ╔═══╤═════════╤════════════════════════╤══════════════╗
-    ║ 7 ╎ [Level] ╎ [Bio, Phys, Chem, Sci] ╎ [standard]   ║
-    ║ 7 ╎ [Level] ╎ [Bio, Phys, Chem]      ╎ [int, ext]   ║
-    ║ 7 ╎ 7       ╎ [year level]           ╎ [year level] ║
-    ╚═══╧═════════╧════════════════════════╧══════════════╝
-    
-  */var s = {
-        '7709': ["19crgtuug4p5ljo", "Year 9 Science"],
-        '7710': ["ip778qpclejktxr", "Year 10 Science"],
-
-        '7103': ["u47l8jnq68p12i3", "Level 1 Biology 1.3"],
-        '7104': ["i603ti90rggf6lt", "Level 1 Biology 1.4"],
-        '7105': ["tg5tx54lwq182z0", "Level 1 Biology 1.5"],
-
-        '7113': ["ki7e1d6xzk1bf23", "Level 1 Physics 1.3"],
-        '7114': ["410ib9ddfy12hcv", "Level 1 Physics 1.4"],
-        '7115': ["zy7zii489fbmt49", "Level 1 Physics 1.5"],
-
-        '7123': ["13mkbtukzcwhes3", "Level 1 Chemistry 1.3"],
-        '7124': ["9vglqucqst4m1i1", "Level 1 Chemistry 1.4"],
-        '7125': ["3nbu0f4rxp8bxh5", "Level 1 Chemistry 1.5"],
-
-        '7131': ["cb8bjg5uhpe5orw", "Level 1 Science 1.1"],
-        '7135': ["ddk5folg9koh5af", "Level 1 Science 1.5"],
-        '7139': ["a9cuplv35cqy73c", "Level 1 Science 1.9"],
-
-        '7200': null,
-        '7201': ["k297ngv68q6o8ai", "Level 2 Biology Externals"],
-
-        '7210': ["shxneny0c58yb8z", "Level 2 Physics Internals"],
-        '7211': ["1bxr81hqjwzsqft", "Level 2 Physics Externals"],
-
-        '7220': ["qq75jtokrysikxn", "Level 2 Chemistry Internals"],
-        '7221': ["aphhpjpzy0mxtn6", "Level 2 Chemistry Externals"]
-    };
-    res.redirect((a => {
-        try {
-            return `https://www.dropbox.com/s/${s[a][0]}/${encodeURIComponent(s[a[1]])}.pdf?dl=1`;
-        } catch (err) {
-            console.warn(chalk.red(err));
-            return '../?scipad=error';
-        }
-    })(req.params.book.toString()));
-});
 app.get('/download', (req, res) => {
     try {
         requireNew('./database');
@@ -163,10 +113,11 @@ app.get('/kamar/', urlencodedParser, KAMAR.index);
     app.post('/kamar/login', urlencodedParser, KAMAR.login);
     app.get('/kamar/timetable', urlencodedParser, KAMAR.TT);
     app.get('/kamar/details', urlencodedParser, KAMAR.details);
+    app.get('/kamar/details/map.js',  KAMAR.map);
 
 app.get('/database.json', (req, res) => res.send(requireNew('./database')));
 
 app.use(express.static('public'));
 app.use((req, res, next) => res.status(404).send('HTTP 404'));
 
-app.listen(port, ip, () => console.log(`Server running on ${chalk.cyan(ip)}:${chalk.cyan.bold(port)}`));
+util.host(host => app.listen(host.port, host.ip, () => console.log(`Server running on ${chalk.cyan(host.ip)}:${chalk.cyan.bold(host.port)}`)));

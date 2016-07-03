@@ -96,5 +96,21 @@ module.exports = {
             res.status(400).send('Error 400');
             console.timeEnd('kamar-details');
         }
+    },
+    map: (req, res) => {
+        console.time('kamar-details-map');
+        try {
+            request({
+                url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(req.query.q)}&region=nz`,
+                method: 'GET',
+                headers: {
+                    'User-Agent': UserAgent
+                }
+            }, (error, response, body) => void res.jsonp(JSON.parse(body).results[0].geometry.location) || console.timeEnd('kamar-details-map'));
+        } catch (err) {
+            console.warn(chak.yellow(err));
+            res.status(400).send('Error 400');
+            console.timeEnd('kamar-details-map');
+        }
     }
 };

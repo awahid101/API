@@ -1,7 +1,9 @@
 const secrets = process.env.AZURE ? {} : require('./secrets'),
       request = require('request'),
       chalk = require('chalk'),
-      fs = require('fs');
+      dns = require('dns'),
+      fs = require('fs'),
+      os = require('os');
 
 try {
     require('./database');
@@ -35,5 +37,9 @@ module.exports = {
             if (s[i] != " ")
                 s[i] = chalk.bold[r[i % r.length]](s[i]);
         return s.join(''); 
-    }
+    },
+    host: callback => dns.lookup(os.hostname(), (err, ip) => callback({
+        port: process.env.OPENSHIFT_NODEJS_PORT || process.env.port || 80,
+        ip: (process.env.isAzure || err) ? '127.0.0.1' : (process.env.OPENSHIFT_NODEJS_IP || ip)
+    }))
 };

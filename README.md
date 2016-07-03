@@ -12,7 +12,7 @@
 
 :school: Web-App & Skype Bot for TGS Daily Notices, news, blog and timetable.   
 
-Hosted on [Azure](http://kyle2.azurewebsites.net) and [OpenShift](http://tgs.kyle.cf)
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
 ```sh
 git clone git://github.com/TGS-App/API.git
@@ -30,20 +30,3 @@ where `{{item}}` is either `notices`, `news` or `blog`.
 # KAMAR API
 
 Read the [KAMAR API Docs](KAMAR)
-
-# Intranet
-
-Use the `-l|--lan[=*]` flag to run on the local intranet instead of localhost
-```powershell
-> node server.js
-  [info] Server running on 127.0.0.1:3978
-
-> node server.js -l
-  [info] Server running on 192.168.1.76:80
-
-> node server.js --lan=192.168.1.80
-  [info] Server running on 192.168.1.80:80
-
-> node server.js --lan="tgs-app.local"
-  [info] Server running on tgs-app.local:80
-```
