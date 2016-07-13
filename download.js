@@ -71,7 +71,7 @@ module.exports = {
         }
     },
     blog: callback => {
-        try { /*.split('\r\n\r\n\r\n\r\n\r\n \r\n \r\n\r\n\t\t\r\n\t\t\r\n\t\r\n\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\r\n')[0]*/
+        try {
             request({
                 uri: 'http://takapuna.school.nz/news/latest-news/',
                 method: 'GET',

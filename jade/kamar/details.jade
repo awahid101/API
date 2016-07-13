@@ -45,7 +45,7 @@ block content
        +'\nORG:Takapuna Grammar School Student #'+_.STUDENTID['#text']
        +'\nGENDER:'+_.GENDER['#text']
        +'\nTITLE:'+_.ETHNICITY['#text']
-       +'\nPHOTO;MEDIATYPE=image/jpeg:https://portal.takapuna.school.nz/api/img.php?Key='+$('Key').value+'&Stuid='+_.STUDENTID['#text']
+       +'\nPHOTO;MEDIATYPE=image/jpeg:https://portal.takapuna.school.nz/api/img.php?Key='+$('Key').value+'&Stuid='+_.STUDENTID['#text'] //doesnt show, mediatype is probably wrong
        +'\nTEL;TYPE=home,voice;home=uri:'+_.HOMEPHONE['#text']
        +'\nADR;TYPE=home;home="'+_.HOMEADDRESS['#text'].replace(/\n/g, '\\n')+'":;;'+_.HOMEADDRESS['#text'].replace(/\n/g, '\\n')
        +'\nEMAIL:'+_.STUDENTID['#text']+'@tgs.school.nz'
@@ -74,5 +74,5 @@ block content
         mkt: 'en-us',
         src: 'SHELL',
         form: 'BMEMJS'
-      }) + '"></iframe>';
+      }) + '">' + _.HOMEADDRESS['#text'] + '</iframe>';
     }
