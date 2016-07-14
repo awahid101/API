@@ -4,7 +4,7 @@ html
     block title
       title TGS App &middot; KAMAR  &middot; Home
     include ../head.jade
-    link(rel="stylesheet", href="../../tgs.css", async)
+    link(rel="stylesheet", href="../../../tgs.css", async)
   body
     script.
       function $(id) {
@@ -40,7 +40,42 @@ html
           }
           return obj;
       };
-    .top: ul.navbar.teal.large: li: a(href="../?" + qp) ‹ Back
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        document.cookie = cname+"="+cvalue+"; expires=" + d.toGMTString();
+      }
+      function getCookie(cname) {
+        var name = cname + "=",
+            ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') 
+            c = c.substring(1);
+          if (c.indexOf(name) == 0) 
+            return c.substring(name.length, c.length);
+        }
+        return '';
+      }
+      function checkCookie(cname) {
+        var cvalue = getCookie(cname);
+        if (cvalue != "") 
+          return !void console.info(cname+':\t',  cvalue);
+        else 
+          return !!void console.warn('Could not find cookie')
+      }
+      function eraseCookie(name) {
+        var pathBits = location.pathname.split('/'),
+            pathCurrent = ' path=';
+        document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;';
+        for (var i = 0; i < pathBits.length; i++) {
+          pathCurrent += ((pathCurrent.substr(-1) != '/') ? '/' : '') + pathBits[i];
+          document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;' + pathCurrent + ';';
+        }
+      }
+      if ((!checkCookie('key') || !checkCookie('username')) && location.search.indexOf('login=required') == -1) 
+        location = '../../../kamar/?login=required&return_to='+encodeURIComponent(location);
+    .top: ul.navbar.teal.large: li: a(href="../") ‹ Back
     br
     br
     .container
@@ -51,6 +86,6 @@ html
     footer.bottom.teal.container: center: small
       a(href="http://github.com/tgs-app") About 
       | | 
-      a(href="http://github.com/k-yle") Contact 
+      a(href="http://github.com/k-yle") Contact
       | | 
-      a(href="http://github.com/tgs-app") View on Github
+      a(href="javascript:void(eraseCookie('key'))||(location='../../../../');") Logout

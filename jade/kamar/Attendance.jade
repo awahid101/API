@@ -1,0 +1,66 @@
+extends ./layout.jade
+
+block title
+  title TGS App &middot; KAMAR &middot; Absences &middot; Details
+
+block content
+  h2 Absences - <small>!{ID}</small>
+  form(action='./download.xlsx', method='post')
+    #XML(hidden)!=XML
+    .timetable(style="overflow-x:scroll")
+      table.table.table-all
+        thead: tr
+          each heading in ['Week of', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+            th= heading
+        tbody#Absences(style="font-family: monospace;")
+    br
+    center: input.btn.green.round(type="submit", name='submit', value='Download as .xlsx')
+    hr
+    p
+      strong J (Justified): 
+      | Student was absent from class with an explained, justified reason.
+      br
+
+      strong U (Unjustified): 
+      | Student was absent from class, either unexplained, or explained but unjustified according to the law. 
+      br
+
+      strong O (Overseas): 
+      | Student was overseas on an approved trip.
+      br
+
+      strong L (Late): 
+      | Student was late to class.
+      br
+
+      strong P (Present): 
+      | Student was present to class.
+      br
+
+      strong.red Red:
+      | !{'&shy;'} Days marked in red contain one or more of J, U, L, O.
+      br
+
+      hr
+      | A student must attend a minimum of 240 minutes per school day to be considered Present all day, or a minimum of 120 minutes to be considered Present a half-day 
+  script.
+    var Ar = xmlToJson($('XML')).STUDENTATTENDANCERESULTS.WEEKS.WEEK;
+    var Hr = [];
+    for (var i = 0; i < Ar.length; i++) {
+        Hr[i] = '<td>' + Ar[i].WEEKSTART['#text'] + '</td>';
+        var Hs = Ar[i].DAYS.DAY;
+        for (var j = 0; j < Hs.length; j++) {
+            var Ht = (Hs[j]['#text']||'----------').substring(0, 7);
+
+            if (Ht.match(/(J|U|L|O)/))
+                Ht = '<span class="red">' + Ht + '</span>';
+            Hr[i] += '<td>' + Ht + '</td>';
+        }
+            
+    }
+    $('Absences').innerHTML = '<tr>' + Hr.join('</tr><tr>').replace(/\-\-\-\-\-\-\-/g, '') + '</tr>'
+    //- $('Absences').innerHTML = '<tr><td><center><strong>Full</strong></center></td><td><center>'+
+    //-   [As('FullDaysJ'), As('FullDaysU'), As('FullDaysO'), As('FullDaysT'), As('FullDaysOpen')].join('</center></td><td><center>')+'</td></tr><tr><td><center><strong>Half</strong></center></td><td><center>'+
+    //-   [As('HalfDaysJ'), As('HalfDaysU'), As('HalfDaysO'), As('HalfDaysT'), As('HalfDaysOpen')].join('</center></td><td><center>')+'</td></tr><tr><td><center><strong>%</strong></center></td><td><center>'+
+    //-   [As('PctgeJ')+'%', As('PctgeU')+'%', As('PctgeO')+'%', As('PctgeT')+'%', ''].join('</center></td><td><center>')+'</center></td></tr>';
+    //- $('PctgeP').innerHTML += As('PctgeP')+'%'

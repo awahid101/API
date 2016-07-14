@@ -1,6 +1,7 @@
 process.stdout.write('Loading...\033[0G');
 
-const requireNew = require('require-new'),
+const cookieParser = require('cookie-parser'),
+      requireNew = require('require-new'),
       bodyParser = require('body-parser'),
       download = require('./download'),
       express = require('express'),
@@ -14,6 +15,8 @@ process.on('uncaughtException', err => console.error(chalk.red.bold(util.report(
 
 var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use(cookieParser());
 
 app.use((req, res, next) => next(void (!process.env.AZURE && console.log(`${chalk[req.method == 'GET' ? 'green' : 'yellow'].bold(req.method)}\t${chalk.grey(req.url)}`))));
 app.get('/', (req, res) => void console.time('index') || void res.send(jade.compileFile('jade/index.jade', {
@@ -89,6 +92,8 @@ app.get('/kamar/timetable', KAMAR.TT);
 app.post('/kamar/timetable/download.ics', urlencodedParser, KAMAR.calendar);
 app.get('/kamar/details', KAMAR.details);
 app.get('/kamar/details/map.js', KAMAR.map);
+app.get('/kamar/absences', KAMAR.AbsStats);
+app.get('/kamar/absences/detail', KAMAR.Attendance);
 app.get('/database.json', (req, res) => res.jsonp(requireNew('./database')));
 app.use(express.static('public'));
 app.use((req, res, next) => res.status(404).send('HTTP 404'));

@@ -8,13 +8,13 @@ block title
 block content
   h2 Details - <small>!{ID}</small>
   #XML(hidden)!= XML
-  input(type="hidden", id="Key", value=Key)
+  input#Key(type="hidden", name="Key", value=Key)
   .details(style="overflow-x:scroll")
-      table.table.table-all
-        thead: tr
-          th Name
-          th Value
-        tbody#details
+    table.table.table-all
+      thead: tr
+        th Name
+        th Value
+      tbody#details
   br
   center
     a.btn.green.round#vcf(href="#", download=ID+".vcf") Save to contacts
@@ -45,7 +45,7 @@ block content
        +'\nORG:Takapuna Grammar School Student #'+_.STUDENTID['#text']
        +'\nGENDER:'+_.GENDER['#text']
        +'\nTITLE:'+_.ETHNICITY['#text']
-       +'\nPHOTO;MEDIATYPE=image/jpeg:https://portal.takapuna.school.nz/api/img.php?Key='+$('Key').value+'&Stuid='+_.STUDENTID['#text'] //doesnt show, mediatype is probably wrong
+       +'\nPHOTO;MEDIATYPE=image/jpg:https://portal.takapuna.school.nz/api/img.php?Key='+$('Key').value+'&Stuid='+_.STUDENTID['#text'] //doesnt show, mediatype is probably wrong
        +'\nTEL;TYPE=home,voice;home=uri:'+_.HOMEPHONE['#text']
        +'\nADR;TYPE=home;home="'+_.HOMEADDRESS['#text'].replace(/\n/g, '\\n')+'":;;'+_.HOMEADDRESS['#text'].replace(/\n/g, '\\n')
        +'\nEMAIL:'+_.STUDENTID['#text']+'@tgs.school.nz'
@@ -54,11 +54,11 @@ block content
        +'\nNOTE:Emergency Contact: '+_.EMERGENCYNAME['#text']+' ('+ _.EMERGENCYPHONECELL['#text']+')\nEND:VCARD');
     }());
     function map(coords) {
-      var formify = function (data) {
+      var formify = function (data, joiner, seperator) {
         var params = [];
         for (var name in data) 
-          params.push(name + '=' + encodeURIComponent(data[name]));
-        return params.join('&');
+          params.push(name + (seperator || '=') + encodeURIComponent(data[name]));
+        return params.join(joiner || '&');
       };
       $('map').innerHTML = '<iframe width="300" height="200" frameborder="0" src="https://www.bing.com/maps/embed/viewer.aspx?' + formify({
         v: 3,

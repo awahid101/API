@@ -25,7 +25,9 @@ module.exports = {
                 }
             }, (error, response, body) => {
                 try {
-                    res.redirect(`./?username=${req.body.username}&key=${error ? 'null' : body.toString().split('<Key>')[1].split('</Key>')[0]}`);
+                    res.cookie('username', req.body.username);
+                    res.cookie('key', error ? 'null' : body.toString().split('<Key>')[1].split('</Key>')[0]);
+                    res.redirect(req.body.return_to || '../kamar/');
                     console.timeEnd('kamar-login');
                 } catch (err) {  
                     console.error(chalk.red(err));
@@ -39,7 +41,11 @@ module.exports = {
             res.status(418).send('Error 418 during login');
         }
     },
-    index: (req, res) => res.send(jade.compileFile('jade/kamar/index.jade')({ Key: req.query.key, ID: req.query.username, qp: req.url.split('?')[1] || '' })),
+    index: (req, res) => res.send(jade.compileFile(`jade/kamar/${req.query.login && req.query.login.toString() == 'required' ? 'login' : 'index'}.jade`)({
+        Key: req.cookies.key,
+        ID: req.cookies.username,
+        return_to: req.query.return_to || ''
+    })),
     TT: (req, res) => {
         console.time('kamar-timetable');
         try {
@@ -48,9 +54,9 @@ module.exports = {
                 method: 'POST',
                 form: {
                     Command: 'GetStudentTimetable',
-                    FileName: `StudentTimetable_2016TT_${req.query.username}`,
-                    Key: req.query.key,
-                    FileStudentID: req.query.username,
+                    FileName: `StudentTimetable_2016TT_${req.cookies.username}`,
+                    Key: req.cookies.key,
+                    FileStudentID: req.cookies.username,
                     Grid: "2016TT"
                 },
                 headers: {
@@ -58,8 +64,7 @@ module.exports = {
                 }
             }, (error, response, body) => void res.send(jade.compileFile('jade/kamar/timetable.jade')({
                 XML: body,
-                ID:  req.query.username,
-                qp: req.url.split('?')[1] || '' 
+                ID:  req.cookies.username
             })) || console.timeEnd('kamar-timetable'));
         } catch (err) {
             console.warn(chak.yellow(err));
@@ -75,9 +80,9 @@ module.exports = {
                 method: 'POST',
                 form: {
                     Command: 'GetStudentDetails',
-                    FileName: `StudentDetails_${req.query.username}_`,
-                    Key: req.query.key,
-                    FileStudentID: req.query.username,
+                    FileName: `StudentDetails_${req.cookies.username}_`,
+                    Key: req.cookies.key,
+                    FileStudentID: req.cookies.username,
                     PastoralNotes: ''
                 },
                 headers: {
@@ -87,9 +92,8 @@ module.exports = {
                 pretty: true
             })({
                 XML: body,
-                ID:  req.query.username,
-                Key: req.query.key || '',
-                qp: req.url.split('?')[1] || '' 
+                ID:  req.cookies.username,
+                Key: req.cookies.key || ''
             })) || console.timeEnd('kamar-details'));
         } catch (err) {
             console.warn(chak.yellow(err));
@@ -193,5 +197,63 @@ DTSTART:20000101T020000\nTZOFFSETFROM:+1200\nTZOFFSETTO:+1300\nRRULE:FREQ=YEARLY
 +event(req.body['1;5|6'], 'FR',  19 ,  1225 ,  1325 )//Day 10, Period 4
 +event(req.body['1;5|7'], 'FR',  19 ,  1405 ,  1505 )//Day 10, Period 5
         );
+    },
+    AbsStats: (req, res) => {
+        console.time('kamar-AbsStats');
+        try {
+            request({
+                url: portal,
+                method: 'POST',
+                form: {
+                    Command: 'GetStudentAbsenceStats',
+                    FileName: `StudentAbsStats_2016TT_${req.cookies.username}`,
+                    Key: req.cookies.key,
+                    FileStudentID: req.cookies.username,
+                    Grid: '2016TT'
+                },
+                headers: {
+                    'User-Agent': UserAgent
+                }
+            }, (error, response, body) => void res.send(jade.compileFile('jade/kamar/AbsStats.jade', {
+                pretty: true
+            })({
+                XML: body,
+                ID:  req.cookies.username,
+                Key: req.cookies.key || ''
+            })) || console.timeEnd('kamar-AbsStats'));
+        } catch (err) {
+            console.warn(chak.yellow(err));
+            res.status(400).send('Error 400');
+            console.timeEnd('kamar-AbsStats');
+        }
+    },
+    Attendance: (req, res) => {
+        console.time('kamar-Attendance');
+        try {
+            request({
+                url: portal,
+                method: 'POST',
+                form: {
+                    Command: 'GetStudentAttendance',
+                    FileName: `StudentAttendance_0_2016TT_${req.cookies.username}`,
+                    Key: req.cookies.key,
+                    FileStudentID: req.cookies.username,
+                    Grid: '2016TT'
+                },
+                headers: {
+                    'User-Agent': UserAgent
+                }
+            }, (error, response, body) => void res.send(jade.compileFile('jade/kamar/Attendance.jade', {
+                pretty: true
+            })({
+                XML: body,
+                ID:  req.cookies.username,
+                Key: req.cookies.key || ''
+            })) || console.timeEnd('kamar-Attendance'));
+        } catch (err) {
+            console.warn(chak.yellow(err));
+            res.status(400).send('Error 400');
+            console.timeEnd('kamar-Attendance');
+        }
     }
 };

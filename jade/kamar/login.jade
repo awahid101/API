@@ -1,0 +1,22 @@
+extends ./layout.jade
+
+block title
+  title TGS App &middot; KAMAR  &middot; Student Details
+
+
+
+block content
+  h2 KAMAR Login
+  form.container.card-4.light-grey(action="../kamar/login", method="POST")
+    p Please login with KAMAR to view this content
+    input(type="hidden", name="return_to", value=return_to)
+    p
+      label Student ID
+      input.input.border.round-xxlarge#usr(type="tel", name="username", placeholder="username")
+    p
+      label KAMAR Password
+      input.input.border.round-xxlarge(type="password", name="password", placeholder="password")
+    p
+      input.btn.blue-grey(type="submit", value="Login") 
+    script.
+      $('usr').placeholder = 'e.g. ' + (getCookie('username') || '15999');
