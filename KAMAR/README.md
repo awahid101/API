@@ -176,6 +176,6 @@ http://{{base_url}}/api/img.php?Key=s{{Key}}&Stuid={{ID}}
 
 # Examples
 
-[Examples Folder](https://github.com/TGS-App/API/blob/master/kamar/examples);
+[Examples Folder](https://github.com/TGS-App/API/tree/master/kamar/examples);
 
-You can reverse engineer the KAMAR mobile app by supplying the portal address with an ngrok tunnel or with `kyle2.azurewebsites.net`, and then inspecting the requests.
+You can [reverse engineer the KAMAR mobile app](https://github.com/TGS-App/API/blob/d439d20b0f1203dc6cda14f250da38b3db048aa3/server.js#L38-63) by supplying the portal address with an ngrok tunnel or with `kyle2.azurewebsites.net`, and then inspecting the requests.
