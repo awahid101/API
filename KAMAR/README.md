@@ -164,3 +164,18 @@ Commands (`{ID}`: `15999`, `{year}`: `2016`):
   FileStudentID = "{ID}"
   Grid = "{year}TT"
 ```
+
+# ID Photo
+
+HTTP GET Request to `/api/img.php` with `Stuid` & `Key`   
+
+Example:
+```handlebars
+http://{{base_url}}/api/img.php?Key=s{{Key}}&Stuid={{ID}}
+```   
+
+# Examples
+
+[Examples Folder](https://github.com/TGS-App/API/blob/master/kamar/examples);
+
+You can reverse engineer the KAMAR mobile app by supplying the portal address with an ngrok tunnel or with `kyle2.azurewebsites.net`, and then inspecting the requests.

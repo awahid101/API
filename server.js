@@ -13,8 +13,8 @@ const cookieParser = require('cookie-parser'),
 
 process.on('uncaughtException', err => console.error(chalk.red.bold(util.report('TGS App: Fatal:', err.toString()))));
 
-var app = express();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var app = express(),
+    urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(cookieParser());
 
@@ -35,26 +35,38 @@ app.get('/api/v1/', (req, res) => {
         res.send('Invalid API Query');
     }
 });
+//Begin: Fake KAMAR API
+app.get('/school-assets/logo.png', (req, res) => void res.contentType('image/png') || res.send(fs.readFileSync('public/img/rhino.png')));
+app.get('/api/img.php', (req, res) => void res.contentType('image/pjpeg') || res.send(fs.readFileSync('public/img/img.jpg')));
 app.post('/api/api.php', urlencodedParser, (req, res) => {
     if (!req.body)
         res.status(400).send(fs.readFileSync('KAMAR/Examples/400.xml'));
-    else if (req.body.Command == 'GetSettings')
-        res.send(fs.readFileSync('KAMAR/Examples/ServerSettings.xml'));
-    else if (req.body.Command == 'Logon')
-        res.send(fs.readFileSync('KAMAR/Examples/Logon.xml').toString().replace('$$ID$$', req.body.Username));
     else
-        res.send('u wot m8?');
+        switch (req.body.Command) {
+            case 'GetCalendar':               res.send(fs.readFileSync('KAMAR/Examples/calendar.xml'                                 )); break;
+            case 'GetEvents':                 res.send(fs.readFileSync('KAMAR/Examples/events.xml'                                    )); break;
+            case 'GetNotices':                res.send(fs.readFileSync('KAMAR/Examples/notices.xml'                                    )); break;
+            case 'GetStudentAbsenceStats':    res.send(fs.readFileSync('KAMAR/Examples/AbsStats.xml'                                    )); break;
+            case 'GetStudentAttendance':      res.send(fs.readFileSync('KAMAR/Examples/Attendance.xml'                                   )); break;
+            case 'GetStudentDetails':         res.send(fs.readFileSync('KAMAR/Examples/Details.xml'                                       )); break;
+            case 'GetStudentNCEASummary':     res.send(fs.readFileSync('KAMAR/Examples/nceaSum.xml'                                        )); break;
+            case 'GetStudentOfficialResults': res.send(fs.readFileSync('KAMAR/Examples/OfficialResults.xml'                                 )); break;
+            case 'GetStudentResults':         res.send(fs.readFileSync('KAMAR/Examples/results.xml'                                          )); break;
+            case 'GetStudentTimetable':       res.send(fs.readFileSync('KAMAR/Examples/Timetable.xml'                                         )); break;
+            case 'GetGlobals':                res.send(fs.readFileSync('KAMAR/Examples/Globals.xml'                                            )); break;
+            case 'GetSettings':               res.send(fs.readFileSync('KAMAR/Examples/ServerSettings.xml'                                      )); break;
+            case 'Logon':                     res.send(fs.readFileSync('KAMAR/Examples/Logon.xml').toString().replace('15999', req.body.Username )); break;
+
+            default: res.send('u wot m8?');
+        }
 });
+//End: Fake KAMAR API
 app.get('/badges?(.svg)?', (req, res) => {
     try {
         var stuff = [{
             name: 'Last Sync',
             value: (date => date.getMinutes() - 3)(new Date()) + 'min',
             color: '#1e90ff'
-        }, {
-            name: 'Spider',
-            value: '✔', //if you can see this then it must be up to date...
-            color: '#4dbd33'
         }, {
             name: 'KAMAR',
             value: 'stable', //if you get a 200 here then it must be OK...
