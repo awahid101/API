@@ -3,13 +3,21 @@ const request = require('request'),
 
 const {parseString} = require('xml2js');
 
+const UA = 'Katal/5.4 (Cargo 3.69; Andriod; Linux;) KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0';
+
 class KAMAR {
     constructor(portal, format, UserAgent) {
         if (!portal)
-            throw new Error('You must include a portal address');
-        this.portal = portal;
-        this.JSON = format == 'JSON';
-        this.UserAgent = UserAgent || 'Katal/5.4 (Cargo 3.69; Andriod; Linux;) KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0';
+            throw new Error('No portal address supplied');
+        else if (typeof portal == 'object') {
+            this.portal = portal.url;
+            this.useXML = portal.format == 'XML';
+            this.UserAgent = portal.UserAgent || UA;
+        } else {
+            this.portal = portal;
+            this.useXML = format == 'XML';
+            this.UserAgent = UserAgent || UA;
+        }
     }
 
     authenticate(userObj, callback) {
@@ -58,12 +66,9 @@ class KAMAR {
             }, (error, response, body) => {
                 if (error)
                     return callback(error);
-                if (this.JSON)
-                    parseString(body, (err, result) => {
-                        callback(null, result);
-                    });
-                else
-                    callback(null, body);
+                if (this.useXML)
+                    return callback(null, body);
+                parseString(body, (err, result) => callback(null, result));
             });
         } catch (err) {
             console.warn(chalk.cyan.bold('[kamar]'), chalk.red.bold(err));

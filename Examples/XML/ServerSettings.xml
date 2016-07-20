@@ -11,8 +11,8 @@
     <StaffSavedPasswords>0</StaffSavedPasswords>
     <SchoolName>Takapuna Grammar School</SchoolName>
     <LogoPath>https://portal.takapuna.school.nz/school-assets/logo.png</LogoPath>
-    <AssessmentTypesShown>AU</AssessmentTypesShown>
-    <ShowEnrolledEntries>0</ShowEnrolledEntries>
+    <AssessmentTypesShown>ACGKOPRSU</AssessmentTypesShown>
+    <ShowEnrolledEntries>1</ShowEnrolledEntries>
     <UserAccess>
         <User index="0">
             <Notices>1</Notices>
@@ -26,9 +26,9 @@
             <Attendance>1</Attendance>
             <NCEA>1</NCEA>
             <Results>1</Results>
-            <Groups>0</Groups>
-            <Awards>0</Awards>
-            <Pastoral>0</Pastoral>
+            <Groups>1</Groups>
+            <Awards>1</Awards>
+            <Pastoral>1</Pastoral>
         </User>
         <User index="2">
             <Notices>1</Notices>
@@ -38,9 +38,9 @@
             <Attendance>1</Attendance>
             <NCEA>1</NCEA>
             <Results>1</Results>
-            <Groups>0</Groups>
-            <Awards>0</Awards>
-            <Pastoral>0</Pastoral>
+            <Groups>1</Groups>
+            <Awards>1</Awards>
+            <Pastoral>1</Pastoral>
         </User>
         <User index="3">
             <Notices>1</Notices>
@@ -50,9 +50,9 @@
             <Attendance>1</Attendance>
             <NCEA>1</NCEA>
             <Results>1</Results>
-            <Groups>0</Groups>
-            <Awards>0</Awards>
-            <Pastoral>0</Pastoral>
+            <Groups>1</Groups>
+            <Awards>1</Awards>
+            <Pastoral>1</Pastoral>
         </User>
         <User index="10">
             <Notices>1</Notices>

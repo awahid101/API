@@ -38,35 +38,29 @@ See the [Example Responses](Examples) and the [FileName rules](api.md#4-get-more
 
 # Example
 
-```js
+```js    
 const katal = require('katal');
-var KAMAR = new katal(
-    'https://portal.takapuna.school.nz/api/api.php',
-    'JSON',
-    'Katal/5.4 KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0'
-);
+var KAMAR = new katal({
+    url: 'https://student.kamar.nz/api/api.php',
+    format: 'JSON',
+    UserAgent: 'Katal/5.4 KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0'
+});
 
 KAMAR.authenticate({
-    username: '15999',
-    password: 'xxxxxxxa'
-}, (err, key) => {
+    username: 'web.student',
+    password: 'student'
+}, (err, Key) => {
     if (err)
         return console.error(err);
-    console.log('Auth Key:', key);
-
-    KAMAR.getFile(`StudentTimetable_2016TT_15999`, {
+    KAMAR.getFile(`StudentTimetable_2016TT_web.student`, {
         Command: 'GetStudentDetails',
-        Key: key,
-        FileStudentID: '15999',
+        Key,
+        FileStudentID: 'web.student',
         PastoralNotes: ''
-    }, (error, result) => {
-        if (error)
-            return console.error(error);
-        console.dir(result);
-    });
+    }, (error, result) => console.info(error || JSON.stringify(result, null, 4)));
 });
 ```
-
+See [example.js](example.js) or [try it now on tonicdev.com](https://tonicdev.com/npm/katal)
 # Official KAMAR API
 
 Read the [KAMAR API Docs](api.md)

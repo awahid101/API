@@ -1,0 +1,38 @@
+{
+  "StudentResultsResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "GetStudentResults_15201" ],
+    "ErrorCode": [ "0" ],
+    "NumberRecords": [ "1" ],
+    "NumberResultLevels": [ "1" ],
+    "StudentID": [ "15201" ],
+    "ResultLevels": [
+      {
+        "ResultLevel": [
+          {
+            "$": { "index": "1" },
+            "NumberResults": [ "1" ],
+            "NCEALevel": [ "1" ],
+            "Results": [
+              {
+                "Result": [
+                  {
+                    "$": { "index": "1" },
+                    "Number": [ "91040" ],
+                    "Version": [ "3" ],
+                    "Grade": [ "Achieved with Excellence" ],
+                    "Title": [ "Social Studies 1.2 - Conduct a social inquiry" ],
+                    "SubField": [ "Social Science Studies" ],
+                    "Credits": [ "4" ],
+                    "CreditsPassed": [ "4" ],
+                    "ResultPublished": [ "2016-06-10" ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

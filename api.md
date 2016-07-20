@@ -71,7 +71,7 @@ This should return:
     <ErrorCode>0</ErrorCode>
     <Success>YES</Success>
     <LogonLevel>1</LogonLevel>
-    <CurrentStudent>$$ID$$</CurrentStudent>
+    <CurrentStudent>{{ID}}</CurrentStudent>
     <Key>xxxxxxxxxxxxxxxxxxxxxxxx</Key>
 </LogonResults>
 ```
@@ -163,19 +163,60 @@ Commands (`{ID}`: `15999`, `{year}`: `2016`):
   FileName = "StudentTimetable_{year}TT_{ID}"
   FileStudentID = "{ID}"
   Grid = "{year}TT"
+
+[GetStudentGroups]
+  FileName = "StudentGroups_{ID}"
+  StudentID = "{ID}"
+  Tchr = 0
+
+[GetStudentPastoral]
+  FileName = "StudentPastoral_{ID}"
+  A = 1
+  C	= 1
+  D	= 1
+  G = 1
+  O = 1
+  StudentID = "{ID}"
+  Tchr = 0
+  U = 1
 ```
 
 # ID Photo
 
-HTTP GET Request to `/api/img.php` with `Stuid` & `Key`   
+HTTP `GET` Request to `/api/img.php` with `Stuid` & `Key`   
 
 Example:
 ```handlebars
 http://{{base_url}}/api/img.php?Key=s{{Key}}&Stuid={{ID}}
 ```   
 
+# Availability Report
+> Last updated on July 20, 2016    
+
+ - [x] Notices
+ - [x] Calendar
+ - [x] Details
+ - [x] Timetable
+ - [x] Attendance
+ - [x] Ncea Summary
+ - [ ] Current Year Results
+ - [x] All Results
+ - [x] Groups
+ - [x] Pastoral
+ - [x] Awards
+ - [ ] Reports
+ - [ ] Profile
+ - [ ] Library
+ - [ ] Course Selection
+ - [ ] Pathways
+ - [ ] Fees
+ - [ ] Fees With Flo2cash
+ - [ ] Fees With Dps
+ - [ ] Fees With Paypal
+> WARNING: [...] Fees with PayPal is still in development
+
 # Examples
 
-[Examples Folder](https://github.com/TGS-App/API/tree/master/kamar/examples);
+[Examples Folder](Examples)
 
-You can [reverse engineer the KAMAR mobile app](https://github.com/TGS-App/API/blob/d439d20b0f1203dc6cda14f250da38b3db048aa3/server.js#L38-63) by supplying the portal address with an ngrok tunnel or with `kyle2.azurewebsites.net`, and then inspecting the requests.
+You can fake the KAMAR mobile app [like this](https://github.com/TGS-App/API/blob/d439d20b0f1203dc6cda14f250da38b3db048aa3/server.js#L38-L63).

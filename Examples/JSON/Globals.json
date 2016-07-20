@@ -1,0 +1,74 @@
+{
+  "StudentGroupsResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "StudentGroups_15999" ],
+    "ErrorCode": [ "0" ],
+    "NumberRecords": [ "6" ],
+    "NumberYears": [ "3" ],
+    "Years": [
+      {
+        "Year": [
+          {
+            "$": { "index": "1" },
+            "Grid": [ "2016TT" ],
+            "NumberGroups": [ "3" ],
+            "Groups": [
+              {
+                "Group": [
+                  {
+                    "$": { "index": "1" },
+                    "Name": [ "New Test Group" ],
+                    "Teacher": [ "Mr G Roberts" ]
+                  },
+                  {
+                    "$": { "index": "2" },
+                    "Name": [ "Snowboard Team" ],
+                    "Teacher": [ "Mr G Roberts" ]
+                  },
+                  {
+                    "$": { "index": "3" },
+                    "Name": [ "Volleyball" ],
+                    "Teacher": [ "D Summerville" ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "$": { "index": "2" },
+            "Grid": [ "2012TT" ],
+            "NumberGroups": [ "1" ],
+            "Groups": [
+              {
+                "Group": [
+                  {
+                    "$": { "index": "1" },
+                    "Name": [ "TEst Group" ],
+                    "Teacher": [ "Mr A Lynam" ],
+                    "GroupComment": [ "blaaahhh" ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "$": { "index": "3" },
+            "Grid": [ "2010TT" ],
+            "NumberGroups": [ "1" ],
+            "Groups": [
+              {
+                "Group": [
+                  {
+                    "$": { "index": "1" },
+                    "Name": [ "Uses Internet" ],
+                    "Teacher": [ "Mr A Lynam" ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

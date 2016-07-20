@@ -1,0 +1,60 @@
+{
+  "StudentPastoralResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "StudentPastoral_web.student" ],
+    "ErrorCode": [ "0" ],
+    "NumberRecords": [ "4" ],
+    "Incidents": [
+      {
+        "Incident": [
+          {
+            "$": { "index": "1" },
+            "Type": [ "A" ],
+            "Number": [ "3" ],
+            "Date": [ "2016-06-09" ],
+            "Teacher": [ "SAM" ],
+            "Reason": [ "Missed Bus" ],
+            "Action1": [ "Lunch Detention" ]
+          },
+          {
+            "$": { "index": "2" },
+            "Type": [ "A" ],
+            "Number": [ "2" ],
+            "Date": [ "2016-05-29" ],
+            "Teacher": [ "SS" ],
+            "Reason": [ "Attendance Poor" ],
+            "Action1": [ "Lunch Detention" ]
+          },
+          {
+            "$": { "index": "3" },
+            "Type": [ "D" ],
+            "Number": [ "1" ],
+            "Date": [ "2015-07-24" ],
+            "Teacher": [ "AM" ],
+            "Reason": [ "Disobedient" ],
+            "Action1": [ "Addiction Counselling" ]
+          },
+          {
+            "$": { "index": "4" },
+            "Type": [ "A" ],
+            "Number": [ "1" ],
+            "Date": [ "2015-07-06" ],
+            "Teacher": [ "AM" ],
+            "Reason": [ "Absentee Concern" ],
+            "Action1": [ "Deans Report" ]
+          },
+          {
+            "$": { "index": "5" },
+            "Type": [ "D" ],
+            "Number": [ "1" ],
+            "Date": [ "2009-06-06" ],
+            "Teacher": [ "JS" ],
+            "Reason": [ "Breaking and Entering" ],
+            "Action1": [ "Expulsion" ],
+            "Action2": [ "Arrested" ]
+          }
+        ]
+      }
+    ]
+  }
+}

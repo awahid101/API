@@ -1,6 +1,6 @@
 {
   "name": "katal",
-  "version": "5.4.2",
+  "version": "5.4.3",
   "description": "KAMAR API",
   "main": "index.js",
   "dependencies": {
@@ -33,5 +33,6 @@
   "devDependencies": {
     "eslint": "^2.13.1",
     "snyk": "^1.17.0"
-  }
+  },
+  "tonicExampleFilename": "example.js"
 }

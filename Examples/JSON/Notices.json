@@ -1,0 +1,11 @@
+{
+  "NoticesResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "Notices_16_6_2016_NO" ],
+    "ErrorCode": [ "0" ],
+    "NoticeDate": [ "7-14-2016" ],
+    "NumberRecords": [ "0" ],
+    "MeetingNotices": [ { "NumberMeetingRecords": [ "0" ] } ],
+    "GeneralNotices": [ { "NumberGeneralRecords": [ "0" ] } ]
+  }
+}

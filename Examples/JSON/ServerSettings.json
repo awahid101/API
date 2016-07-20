@@ -1,0 +1,145 @@
+{
+  "SettingsResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "ServerSettings" ],
+    "ErrorCode": [ "0" ],
+    "SettingsVersion": [ "1.03" ],
+    "MiniOSVersion": [ "2.14" ],
+    "MinAndroidVersion": [ "1.08" ],
+    "StudentsAllowed": [ "1" ],
+    "StaffAllowed": [ "1" ],
+    "StudentsSavedPasswords": [ "1" ],
+    "StaffSavedPasswords": [ "0" ],
+    "SchoolName": [ "Takapuna Grammar School" ],
+    "LogoPath": [ "https://portal.takapuna.school.nz/school-assets/logo.png" ],
+    "AssessmentTypesShown": [ "ACGKOPRSU" ], //Everything
+    "ShowEnrolledEntries": [ "1" ],
+    "UserAccess": [
+      {
+        "User": [
+          {
+            "$": { "index": "0" },
+            "Notices": [ "1" ],
+            "Events": [ "1" ]
+          },
+          {
+            "$": { "index": "1" },
+            "Notices": [ "1" ],
+            "Events": [ "1" ],
+            "Details": [ "1" ],
+            "Timetable": [ "1" ],
+            "Attendance": [ "1" ],
+            "NCEA": [ "1" ],
+            "Results": [ "1" ],
+            "Groups": [ "1" ],
+            "Awards": [ "1" ],
+            "Pastoral": [ "1" ]
+          },
+          {
+            "$": { "index": "2" },
+            "Notices": [ "1" ],
+            "Events": [ "1" ],
+            "Details": [ "1" ],
+            "Timetable": [ "1" ],
+            "Attendance": [ "1" ],
+            "NCEA": [ "1" ],
+            "Results": [ "1" ],
+            "Groups": [ "1" ],
+            "Awards": [ "1" ],
+            "Pastoral": [ "1" ]
+          },
+          {
+            "$": { "index": "3" },
+            "Notices": [ "1" ],
+            "Events": [ "1" ],
+            "Details": [ "1" ],
+            "Timetable": [ "1" ],
+            "Attendance": [ "1" ],
+            "NCEA": [ "1" ],
+            "Results": [ "1" ],
+            "Groups": [ "1" ],
+            "Awards": [ "1" ],
+            "Pastoral": [ "1" ]
+          },
+          {
+            "$": { "index": "10" },
+            "Notices": [ "1" ],
+            "Events": [ "1" ],
+            "Details": [ "1" ],
+            "Timetable": [ "1" ],
+            "Attendance": [ "1" ],
+            "Results": [ "1" ],
+            "Groups": [ "1" ],
+            "Awards": [ "1" ],
+            "Pastoral": [ "1" ]
+          },
+          {
+            "$": { "index": "20" },
+            "Notices": [ "0" ],
+            "Events": [ "0" ],
+            "Details": [ "0" ],
+            "Timetable": [ "0" ],
+            "Attendance": [ "0" ],
+            "NCEA": [ "0" ],
+            "Results": [ "0" ],
+            "Groups": [ "0" ],
+            "Awards": [ "0" ],
+            "Pastoral": [ "0" ]
+          },
+          {
+            "$": { "index": "21" },
+            "Notices": [ "0" ],
+            "Events": [ "0" ],
+            "Details": [ "0" ],
+            "Timetable": [ "0" ],
+            "Attendance": [ "0" ],
+            "NCEA": [ "0" ],
+            "Results": [ "0" ],
+            "Groups": [ "0" ],
+            "Awards": [ "0" ],
+            "Pastoral": [ "0" ]
+          },
+          {
+            "$": { "index": "22" },
+            "Notices": [ "0" ],
+            "Events": [ "0" ],
+            "Details": [ "0" ],
+            "Timetable": [ "0" ],
+            "Attendance": [ "0" ],
+            "NCEA": [ "0" ],
+            "Results": [ "0" ],
+            "Groups": [ "0" ],
+            "Awards": [ "0" ],
+            "Pastoral": [ "0" ]
+          },
+          {
+            "$": { "index": "23" },
+            "Notices": [ "0" ],
+            "Events": [ "0" ],
+            "Details": [ "0" ],
+            "Timetable": [ "0" ],
+            "Attendance": [ "0" ],
+            "NCEA": [ "0" ],
+            "Results": [ "0" ],
+            "Groups": [ "0" ],
+            "Awards": [ "0" ],
+            "Pastoral": [ "0" ]
+          },
+          {
+            "$": { "index": "24" },
+            "Notices": [ "0" ],
+            "Events": [ "0" ],
+            "Details": [ "0" ],
+            "Timetable": [ "0" ],
+            "Attendance": [ "0" ],
+            "NCEA": [ "0" ],
+            "Results": [ "0" ],
+            "Groups": [ "0" ],
+            "Awards": [ "0" ],
+            "Pastoral": [ "0" ]
+          }
+        ]
+      }
+    ]
+  }
+}

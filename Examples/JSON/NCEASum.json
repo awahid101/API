@@ -1,0 +1,99 @@
+{
+  "StudentNCEASummaryResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "GetStudentNCEASummary_15201" ],
+    "ErrorCode": [ "0" ],
+    "NumberRecords": [ "1" ],
+    "Students": [
+      {
+        "Student": [
+          {
+            "$": { "index": "1" },
+            "CreditsTotal": [
+              {
+                "Excellence": [ "4" ],
+                "Total": [ "4" ],
+                "Attempted": [ "4" ]
+              }
+            ],
+            "CreditsInternal": [
+              {
+                "Excellence": [ "4" ],
+                "Total": [ "4" ],
+                "Attempted": [ "4" ]
+              }
+            ],
+            "YearTotals": [
+              {
+                "YearTotal": [
+                  {
+                    "$": { "index": "1" },
+                    "Year": [ "2016" ],
+                    "Excellence": [ "4" ],
+                    "Total": [ "4" ],
+                    "Attempted": [ "4" ]
+                  },
+                  {
+                    "$": { "index": "2" },
+                    "Year": [ "2015" ]
+                  },
+                  {
+                    "$": { "index": "3" },
+                    "Year": [ "2014" ]
+                  },
+                  {
+                    "$": { "index": "4" },
+                    "Year": [ "2013" ]
+                  },
+                  {
+                    "$": { "index": "5" },
+                    "Year": [ "2012" ]
+                  }
+                ]
+              }
+            ],
+            "LevelTotals": [
+              {
+                "LevelTotal": [
+                  {
+                    "$": { "index": "1" },
+                    "Level": [ "1" ],
+                    "Excellence": [ "4" ],
+                    "Total": [ "4" ],
+                    "Attempted": [ "4" ]
+                  },
+                  {
+                    "$": { "index": "2" },
+                    "Level": [ "2" ]
+                  },
+                  {
+                    "$": { "index": "3" },
+                    "Level": [ "3" ]
+                  },
+                  {
+                    "$": { "index": "4" },
+                    "Level": [ "4" ]
+                  },
+                  {
+                    "$": { "index": "5" },
+                    "Level": [ "5" ]
+                  }
+                ]
+              }
+            ],
+            "NCEA": [
+              {
+                "L1NCEA": [ "NO" ],
+                "L2NCEA": [ "NO" ],
+                "L3NCEA": [ "NO" ],
+                "NCEAUELIT": [ "No : 0/0/0" ],
+                "NCEANUM": [ "No : 0/0 credits" ],
+                "NCEAL1LIT": [ "No : 4/0 credits" ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

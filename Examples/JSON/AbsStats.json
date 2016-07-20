@@ -1,0 +1,32 @@
+{
+  "StudentAbsenceStatsResults": {
+    "$": { "apiversion": "2.4.2" },
+    "FileName": [ "StudentAbsStats_2016TT_15201" ],
+    "ErrorCode": [ "0" ],
+    "NumberRecords": [ "1" ],
+    "Students": [
+      {
+        "Student": [
+          {
+            "$": { "index": "1" },
+            "HalfDaysJ": [ "6" ],
+            "HalfDaysU": [ "1" ],
+            "HalfDaysO": [ "1" ],
+            "HalfDaysT": [ "12" ],
+            "HalfDaysOpen": [ "206" ],
+            "FullDaysJ": [ "1" ],
+            "FullDaysU": [ "" ],
+            "FullDaysO": [ "1" ],
+            "FullDaysT": [ "9" ],
+            "FullDaysOpen": [ "103" ],
+            "PctgeJ": [ "3" ],
+            "PctgeU": [ "2" ],
+            "PctgeO": [ "1" ],
+            "PctgeT": [ "4" ],
+            "PctgeP": [ "93" ]
+          }
+        ]
+      }
+    ]
+  }
+}
