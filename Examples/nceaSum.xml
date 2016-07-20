@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StudentNCEASummaryResults apiversion="2.4.2">
+    <FileName>GetStudentNCEASummary_15201</FileName>
+    <ErrorCode>0</ErrorCode>
+    <NumberRecords>1</NumberRecords>
+    <Students>
+        <Student index="1">
+            <CreditsTotal>
+                <Excellence>4</Excellence>
+                <Total>4</Total>
+                <Attempted>4</Attempted>
+            </CreditsTotal>
+            <CreditsInternal>
+                <Excellence>4</Excellence>
+                <Total>4</Total>
+                <Attempted>4</Attempted>
+            </CreditsInternal>
+            <YearTotals>
+                <YearTotal index="1">
+                    <Year>2016</Year>
+                    <Excellence>4</Excellence>
+                    <Total>4</Total>
+                    <Attempted>4</Attempted>
+                </YearTotal>
+                <YearTotal index="2">
+                    <Year>2015</Year>
+                </YearTotal>
+                <YearTotal index="3">
+                    <Year>2014</Year>
+                </YearTotal>
+                <YearTotal index="4">
+                    <Year>2013</Year>
+                </YearTotal>
+                <YearTotal index="5">
+                    <Year>2012</Year>
+                </YearTotal>
+            </YearTotals>
+            <LevelTotals>
+                <LevelTotal index="1">
+                    <Level>1</Level>
+                    <Excellence>4</Excellence>
+                    <Total>4</Total>
+                    <Attempted>4</Attempted>
+                </LevelTotal>
+                <LevelTotal index="2">
+                    <Level>2</Level>
+                </LevelTotal>
+                <LevelTotal index="3">
+                    <Level>3</Level>
+                </LevelTotal>
+                <LevelTotal index="4">
+                    <Level>4</Level>
+                </LevelTotal>
+                <LevelTotal index="5">
+                    <Level>5</Level>
+                </LevelTotal>
+            </LevelTotals>
+            <NCEA>
+                <L1NCEA>NO</L1NCEA>
+                <L2NCEA>NO</L2NCEA>
+                <L3NCEA>NO</L3NCEA>
+                <NCEAUELIT>No : 0/0/0</NCEAUELIT>
+                <NCEANUM>No : 0/0 credits</NCEANUM>
+                <NCEAL1LIT>No : 4/0 credits</NCEAL1LIT>
+            </NCEA>
+        </Student>
+    </Students>
+</StudentNCEASummaryResults>

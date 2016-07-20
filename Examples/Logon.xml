@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogonResults apiversion="2.4.2">
+    <FileName>Logon</FileName>
+    <ErrorCode>0</ErrorCode>
+    <Success>YES</Success>
+    <LogonLevel>1</LogonLevel>
+    <CurrentStudent>15999</CurrentStudent>
+    <Key>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Key>
+</LogonResults>

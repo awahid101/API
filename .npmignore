@@ -1,0 +1,7 @@
+.eslintignore
+.eslintrc
+.gitignore
+node_modules
+.travis.yml
+.snyk
+*.snyk

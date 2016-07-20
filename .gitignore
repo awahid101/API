@@ -1,8 +1,3 @@
-public/jade
-public/index.html
-web.config
 node_modules
-database.json
-SECRETS
 .snyk
 *.snyk
