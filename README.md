@@ -1,33 +1,72 @@
-# TGS App (project katal)
+# KAMAR API (project katal)
 [![npm version](https://badge.fury.io/js/katal.svg)](https://badge.fury.io/js/katal)
 [![Build Status](https://travis-ci.org/TGS-App/API.svg?branch=master)](https://travis-ci.org/TGS-App/API)
 [![Inline docs](http://inch-ci.org/github/tgs-app/api.svg?branch=master)](http://inch-ci.org/github/tgs-app/api)
 [![Known Vulnerabilities](https://snyk.io/test/github/tgs-app/api/badge.svg)](https://snyk.io/test/github/tgs-app/api)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](LICENSE)
-[![Last Sync](http://kyle2.azurewebsites.net/badge.svg?i=0)](http://tgs.kyle.cf)
-[![KAMAR](http://kyle2.azurewebsites.net/badge.svg?i=1)](http://tgs.kyle.cf)
 
-[![NPM](https://nodei.co/npm/katal.png?compact=true)](https://npmjs.org/package/katal)
+[![NPM](https://nodei.co/npm/katal.png)](https://npmjs.org/package/katal)
 
-:school: Web-App for TGS Daily Notices, news, blog, timetable, student details & absences.   
-
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+# Install
 
 ```sh
-git clone git://github.com/TGS-App/API.git
-cd API
-npm install && npm start
+npm i -S katal
 ```
 
-# Read the database
-```handlebars
-http://{{base_url}}/api/v1/?q={{item}}
-```   
+# Usage
 
-where `{{item}}` is either `notices`, `news` or `blog`.
+```js
+new katal(portal[, format[, UserAgent]]);
+```
+Where `portal` is the address of the KAMAR portal, `format` is `JSON` or `XML` and UserAgent is the UserAgent.
+The default UserAgent is accepted by API version 2.4+ (`Katal/5.4 (Cargo 3.69; Andriod; Linux;) KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0`).
 
-To download the database cache: `http://{{base_url}}/database.json`   
+```js
+KAMAR.authenticate(credentials, callback);
+```
+`credentials` is an object containing the `username` and `password` fields.
+The callback returns `(err, key)`.
+`err` is returned if an error occured, otherwise `err` is `null` and the second parameter is the `key`.
 
-# KAMAR API
+```js
+KAMAR.getFile(FileName, formData, callback);
+```
+`FileName` is the name of the file, formData is an object containing all the other parameters, including `Key`.
+The callback returns `(err, key)`. `err` is returned if an error occured, otherwise `err` is `null` and the second parameter is the `response`.
 
-Read the [KAMAR API Docs](KAMAR)
+See the [Example Responses](Examples) and the [FileName rules](api.md#4-get-more-stuff)
+
+# Example
+
+```js
+const katal = require('katal');
+var KAMAR = new katal(
+    'https://portal.takapuna.school.nz/api/api.php',
+    'JSON',
+    'Katal/5.4 KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0'
+);
+
+KAMAR.authenticate({
+    username: '15999',
+    password: 'xxxxxxxa'
+}, (err, key) => {
+    if (err)
+        return console.error(err);
+    console.log('Auth Key:', key);
+
+    KAMAR.getFile(`StudentTimetable_2016TT_15999`, {
+        Command: 'GetStudentDetails',
+        Key: key,
+        FileStudentID: '15999',
+        PastoralNotes: ''
+    }, (error, result) => {
+        if (error)
+            return console.error(error);
+        console.dir(result);
+    });
+});
+```
+
+# Official KAMAR API
+
+Read the [KAMAR API Docs](api.md)
