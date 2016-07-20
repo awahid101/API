@@ -1,6 +1,6 @@
 {
   "name": "katal",
-  "version": "5.4.1",
+  "version": "5.4.2",
   "description": "KAMAR API",
   "main": "index.js",
   "dependencies": {

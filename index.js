@@ -60,8 +60,9 @@ class KAMAR {
                     return callback(error);
                 if (this.JSON)
                     parseString(body, (err, result) => {
-                        console.dir(result);
+                        callback(null, result);
                     });
+                else
                     callback(null, body);
             });
         } catch (err) {
