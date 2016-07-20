@@ -1,7 +1,7 @@
 const request = require('request'),
       chalk = require('chalk');
 
-const {parseString} = require('xml2js');
+const parseString = require('xml2js').parseString; //curly braces aren't supported on openshift
 
 const UA = 'Katal/5.4 (Cargo 3.69; Andriod; Linux;) KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0';
 
