@@ -1,38 +1,321 @@
 {
-  "StudentResultsResults": {
-    "$": { "apiversion": "2.4.2" },
-    "FileName": [ "GetStudentResults_15201" ],
-    "ErrorCode": [ "0" ],
-    "NumberRecords": [ "1" ],
-    "NumberResultLevels": [ "1" ],
-    "StudentID": [ "15201" ],
-    "ResultLevels": [
-      {
-        "ResultLevel": [
-          {
-            "$": { "index": "1" },
-            "NumberResults": [ "1" ],
-            "NCEALevel": [ "1" ],
-            "Results": [
-              {
-                "Result": [
-                  {
-                    "$": { "index": "1" },
-                    "Number": [ "91040" ],
-                    "Version": [ "3" ],
-                    "Grade": [ "Achieved with Excellence" ],
-                    "Title": [ "Social Studies 1.2 - Conduct a social inquiry" ],
-                    "SubField": [ "Social Science Studies" ],
-                    "Credits": [ "4" ],
-                    "CreditsPassed": [ "4" ],
-                    "ResultPublished": [ "2016-06-10" ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+    "StudentResultsResults": {
+        "$": {
+            "apiversion": "2.4.2"
+        },
+        "FileName": ["StudentOfficialResults_15201"],
+        "ErrorCode": ["0"],
+        "NumberRecords": ["24"],
+        "NumberResultLevels": ["2"],
+        "StudentID": ["15201"],
+        "ResultLevels": [{
+            "ResultLevel": [{
+                "$": {
+                    "index": "1"
+                },
+                "NumberResults": ["2"],
+                "NCEALevel": ["1"],
+                "Results": [{
+                    "Result": [{
+                        "$": {
+                            "index": "1"
+                        },
+                        "Number": ["91030"],
+                        "Version": ["3"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Mathematics and Statistics 1.5 - Apply measurement in solving problems"],
+                        "SubField": ["Mathematics"],
+                        "Credits": ["3"],
+                        "CreditsPassed": ["3"],
+                        "ResultPublished": ["2016-08-15"]
+                    }, {
+                        "$": {
+                            "index": "2"
+                        },
+                        "Number": ["91040"],
+                        "Version": ["3"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Social Studies 1.2 - Conduct a social inquiry"],
+                        "SubField": ["Social Science Studies"],
+                        "Credits": ["4"],
+                        "CreditsPassed": ["4"],
+                        "ResultPublished": ["2016-06-10"]
+                    }]
+                }]
+            }, {
+                "$": {
+                    "index": "2"
+                },
+                "NumberResults": ["22"],
+                "NCEALevel": ["0"],
+                "Results": [{
+                    "Result": [{
+                        "$": {
+                            "index": "1"
+                        },
+                        "Number": ["10ART01"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Practical Knowledge"],
+                        "SubField": ["Art"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-30"]
+                    }, {
+                        "$": {
+                            "index": "2"
+                        },
+                        "Number": ["10ART03"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Developing Ideas"],
+                        "SubField": ["Art"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-30"]
+                    }, {
+                        "$": {
+                            "index": "3"
+                        },
+                        "Number": ["10EFL01"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Enterprise"],
+                        "SubField": ["Business & Enterprise"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-05-23"]
+                    }, {
+                        "$": {
+                            "index": "4"
+                        },
+                        "Number": ["10EFL02"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Business Studies"],
+                        "SubField": ["Business & Enterprise"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-05-23"]
+                    }, {
+                        "$": {
+                            "index": "5"
+                        },
+                        "Number": ["10EFL03"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Asia"],
+                        "SubField": ["Business & Enterprise"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-05-23"]
+                    }, {
+                        "$": {
+                            "index": "6"
+                        },
+                        "Number": ["10EFL04"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Accounting"],
+                        "SubField": ["Business & Enterprise"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-13"]
+                    }, {
+                        "$": {
+                            "index": "7"
+                        },
+                        "Number": ["10ENG01"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Speech"],
+                        "SubField": ["English"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-30"]
+                    }, {
+                        "$": {
+                            "index": "8"
+                        },
+                        "Number": ["10ENG02"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Creative Writing"],
+                        "SubField": ["English"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-30"]
+                    }, {
+                        "$": {
+                            "index": "9"
+                        },
+                        "Number": ["10ENG04"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Literary Essay"],
+                        "SubField": ["English"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-30"]
+                    }, {
+                        "$": {
+                            "index": "10"
+                        },
+                        "Number": ["10FRE04"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Speaking"],
+                        "SubField": ["Languages"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-05"]
+                    }, {
+                        "$": {
+                            "index": "11"
+                        },
+                        "Number": ["10FRE05"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Listening"],
+                        "SubField": ["Languages"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-05"]
+                    }, {
+                        "$": {
+                            "index": "12"
+                        },
+                        "Number": ["10FRE06"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Reading"],
+                        "SubField": ["Languages"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-05"]
+                    }, {
+                        "$": {
+                            "index": "13"
+                        },
+                        "Number": ["10FRE08"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Writing"],
+                        "SubField": ["Languages"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-05"]
+                    }, {
+                        "$": {
+                            "index": "14"
+                        },
+                        "Number": ["L1AMA04"],
+                        "Version": ["16"],
+                        "Grade": ["Achieved with Excellence"],
+                        "Title": ["Linear Algebra and Graphs"],
+                        "SubField": ["Mathematics"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-03-15"]
+                    }, {
+                        "$": {
+                            "index": "15"
+                        },
+                        "Number": ["L1AMA05"],
+                        "Version": ["16"],
+                        "Grade": ["Achieved with Excellence"],
+                        "Title": ["Geometric Reasoning"],
+                        "SubField": ["Mathematics"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-04-13"]
+                    }, {
+                        "$": {
+                            "index": "16"
+                        },
+                        "Number": ["10HPE01"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Cardiovascular Fitness"],
+                        "SubField": ["Physical Education"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-04"]
+                    }, {
+                        "$": {
+                            "index": "17"
+                        },
+                        "Number": ["10HPE05"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Health"],
+                        "SubField": ["Physical Education"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-04"]
+                    }, {
+                        "$": {
+                            "index": "18"
+                        },
+                        "Number": ["L1ASC01"],
+                        "Version": ["16"],
+                        "Grade": ["Achieved with Excellence"],
+                        "Title": ["Practice for: Physics 1.5 - Demonstrate understanding of aspects of heat"],
+                        "SubField": ["Science"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-10"]
+                    }, {
+                        "$": {
+                            "index": "19"
+                        },
+                        "Number": ["L1ASC02"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Practice for: Chemistry 1.4 - Demonstrate understanding of aspects of selected elements"],
+                        "SubField": ["Science"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-07-04"]
+                    }, {
+                        "$": {
+                            "index": "20"
+                        },
+                        "Number": ["10DVC01"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Nature of Technology"],
+                        "SubField": ["Technology"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-01"]
+                    }, {
+                        "$": {
+                            "index": "21"
+                        },
+                        "Number": ["10DVC02"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Technical Drawing"],
+                        "SubField": ["Technology"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-06-15"]
+                    }, {
+                        "$": {
+                            "index": "22"
+                        },
+                        "Number": ["10DVC03"],
+                        "Version": ["16"],
+                        "Grade": ["Excellence"],
+                        "Title": ["Design Development"],
+                        "SubField": ["Technology"],
+                        "Credits": [""],
+                        "CreditsPassed": ["0"],
+                        "ResultPublished": ["2016-05-27"]
+                    }]
+                }]
+            }]
+        }]
+    }
 }
