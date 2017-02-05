@@ -10,34 +10,34 @@
 
     /**** Staff only ****/
 
-    // "CurrentTeacher": [ "JS" ],
-    // "StaffUser": [
-    //   {
-    //     "$": { "index": "1" },
-    //     "Code": [ "JS" ],
-    //     "Title": [ "Mr" ],
-    //     "Gender": [ "Male" ],
-    //     "FirstName": [ "V." ],
-    //     "LastName": [ "Jacobson" ],
-    //     "Tutor": [ "" ],
-    //     "UserAccess": [
-    //       {
-    //         "PastoralNotes": [ "Y" ],
-    //         "PastoralA": [ "F" ],
-    //         "PastoralD": [ "F" ],
-    //         "PastoralG": [ "F" ],
-    //         "PastoralU": [ "F" ],
-    //         "PastoralO": [ "F" ],
-    //         "PastoralC": [ "F" ],
-    //         "TeacherDetails": [ "3" ],
-    //         "StudentsMenu": [ "1" ],
-    //         "TeachersMenu": [ "1" ],
-    //         "EnterAttendance": [ "1" ]
-    //       }
-    //     ],
-    //     "Departments": [ "English for Speakers of Other Languages (ESOL)", "English", "Media Studies (TIC)" ],
-    //     "Emails": [ { "School": [ "9" ] } ]
-    //   }
-    // ]
+    "CurrentTeacher": [ "JS" ],
+    "StaffUser": [
+      {
+        "$": { "index": "1" },
+        "Code": [ "JS" ],
+        "Title": [ "Mr" ],
+        "Gender": [ "Male" ],
+        "FirstName": [ "V." ],
+        "LastName": [ "Jacobson" ],
+        "Tutor": [ "" ],
+        "UserAccess": [
+          {
+            "PastoralNotes": [ "Y" ],
+            "PastoralA": [ "F" ],
+            "PastoralD": [ "F" ],
+            "PastoralG": [ "F" ],
+            "PastoralU": [ "F" ],
+            "PastoralO": [ "F" ],
+            "PastoralC": [ "F" ],
+            "TeacherDetails": [ "3" ],
+            "StudentsMenu": [ "1" ],
+            "TeachersMenu": [ "1" ],
+            "EnterAttendance": [ "1" ]
+          }
+        ],
+        "Departments": [ "English for Speakers of Other Languages (ESOL)", "English", "Media Studies (TIC)" ],
+        "Emails": [ { "School": [ "9" ] } ]
+      }
+    ]
   }
 }

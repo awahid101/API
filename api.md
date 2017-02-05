@@ -1,10 +1,11 @@
 # KAMAR API docs (unofficial)
 
-:school_satchel: POST to `/api/api.php` with `application/x-www-form-urlencoded`.     
+> For the high-level, node.js module see [here](README.MD)    
+
+POST to `/api/api.php` with `application/x-www-form-urlencoded`.     
 
 UserAgent: `KAMAR/1455 CFNetwork/758.4.3 Darwin/15.5.0`
 
-To convert responses to JSON, see [this](https://github.com/TGS-App/API/blob/42bd30754cbaed9d0863d36025fb3c21ce370697/jade/timetable.jade#L41-L77) function.
 # 1. Get `ServerSettings` (optional)
 
 
@@ -115,7 +116,10 @@ Key:    	{{key returned by step #2}}
 [...]
 ```
 
-Commands (`{ID}`: `15999`, `{year}`: `2016`):
+## Commands 
+`{ID}` = Student ID, e.g. `15999`    
+`{year}` = current year, e.g. `2016`    
+
 ```toml
 [GetCalendar]
   FileName = "Calendar_{year}"
@@ -183,11 +187,11 @@ Commands (`{ID}`: `15999`, `{year}`: `2016`):
 
 # ID Photo
 
-HTTP `GET` Request to `/api/img.php` with `Stuid` & `Key`   
+HTTP `GET` Request to `/api/img.php` with `Stuid` & `Key` parameters   
 
-Example:
+## Example
 ```handlebars
-http://{{base_url}}/api/img.php?Key=s{{Key}}&Stuid={{ID}}
+https://{{portal_url}}/api/img.php?Key=s{{Key}}&Stuid={{ID}}
 ```   
 
 # Availability Report
@@ -212,11 +216,18 @@ http://{{base_url}}/api/img.php?Key=s{{Key}}&Stuid={{ID}}
  - [ ] Fees
  - [ ] Fees With Flo2cash
  - [ ] Fees With Dps
- - [ ] Fees With Paypal
-> WARNING: [...] Fees with PayPal is still in development
+ - [ ] Fees With Paypal -- WARNING: [...] Fees with PayPal is still in development
+
+# Errors
+
+Errors from the API typically contain the `ErrorCode` and `Error` parameters.
+They are explained below: 
+
+ - `-2` missing the `key` parameter
+ - `22` [internal] database connection error - see https://www.kamar.nz/105645
 
 # Examples
 
-[Examples Folder](Examples)
+[Example Responses](Examples)
 
-You can fake the KAMAR mobile app [like this](https://github.com/TGS-App/API/blob/d439d20b0f1203dc6cda14f250da38b3db048aa3/server.js#L38-L63).
+You can fake the official KAMAR API, and trick the app [like this](https://github.com/TGS-App/API/blob/d439d20b0f1203dc6cda14f250da38b3db048aa3/server.js#L38-L63).

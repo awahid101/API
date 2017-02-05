@@ -1,11 +1,10 @@
 # KAMAR API (project katal)
 [![npm version](https://badge.fury.io/js/katal.svg)](https://badge.fury.io/js/katal)
-[![Build Status](https://travis-ci.org/TGS-App/API.svg?branch=master)](https://travis-ci.org/TGS-App/API)
-[![Inline docs](http://inch-ci.org/github/tgs-app/api.svg?branch=master)](http://inch-ci.org/github/tgs-app/api)
-[![Known Vulnerabilities](https://snyk.io/test/github/tgs-app/api/badge.svg)](https://snyk.io/test/github/tgs-app/api)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](LICENSE)
 
 [![NPM](https://nodei.co/npm/katal.png)](https://npmjs.org/package/katal)
+
+> :school: :school_satchel: :books: Unofficial node.js module for interfacing with the undocumented [KAMAR](http://kamar.nz) API (project katal).
 
 # Install
 
@@ -16,51 +15,66 @@ npm i -S katal
 # Usage
 
 ```js
-new katal(portal[, format[, UserAgent]]);
+const katal = require('katal');
+const options = {
+  portal: 'student.kamar.nz'
+};
+var KAMAR = new katal(options);
 ```
-Where `portal` is the address of the KAMAR portal, `format` is `JSON` or `XML` and UserAgent is the UserAgent.
-The default UserAgent is accepted by API version 2.4+ (`Katal/5.4 (Cargo 3.69; Andriod; Linux;) KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0`).
+The `options` object can contain the folowing properties: 
+ - `portal` - the url of the KAMAR portal - do not include `http(s)://` or `/api/api.php`
+ - `year` - the year to lookup all queries with.
+ - `TT` - the [Timetable Grid](https://www.kamar.nz/103835) to lookup Timetable and Absences by. Leave blank unless you understand how grids work. By default it is the `year + "TT"`.
+ - `UserAgent` - specify a custom UserAgent for requests to the KAMAR portal here, if required.
 
+## Authenticating
 ```js
-KAMAR.authenticate(credentials, callback);
-```
-`credentials` is an object containing the `username` and `password` fields.
-The callback returns `(err, key)`.
-`err` is returned if an error occured, otherwise `err` is `null` and the second parameter is the `key`.
+KAMAR
+    .authenticate(credentials); //credentials is an object containing `username` and `password`.
+    .then(key => doSomethingWithKey(key))
+    .catch(error => throw new Error(error));
+```   
 
+
+
+## Fetching Files
 ```js
-KAMAR.getFile(FileName, formData, callback);
+KAMAR.getXXXXX(credentials);  //credentials is an object containing `username` and `key`.
 ```
-`FileName` is the name of the file, formData is an object containing all the other parameters, including `Key`.
-The callback returns `(err, key)`. `err` is returned if an error occured, otherwise `err` is `null` and the second parameter is the `response`.
 
-See the [Example Responses](Examples) and the [FileName rules](api.md#4-get-more-stuff)
+### Methods
+ - `authenticate` -  see [above](#Authenticating)
+ - `getAbsences` - Note that Absence-Statistics are in a seperate file.
+ - `getAbsencesStatistics` - Note that Absence by period are in a seperate file.
+ - `getTimeTable` - Get this- & next week's Timetable.
+ - `getDetails` - Get Personal Details about student.
+ - `getResults` - Note that OfficialResults & NCEASummary are both in seperate files.
+ - `getNCEASummary` - Note that OfficialResults & Results are both in seperate files.
+ - -----
+ - `getFile` - fetch any file - Note that more convenient methods exist for common files.
+ - -----
+ - `makevCardFromDetails` - convert Details to vCard (VCF) format.
+ - `makeASCIItableWithAbsences` - convert Absences to ASCII table (TXT) format.
+
+See the [Example Responses](Examples) and the [FileName rules](api.md#4-get-more-stuff) (for the `getFile` query)
 
 # Example
 
 ```js    
 const katal = require('katal');
-var KAMAR = new katal({
-    url: 'https://student.kamar.nz/api/api.php',
-    format: 'JSON',
-    UserAgent: 'Katal/5.4 KAMAR/1455 CFNetwork/790.2 Darwin/16.0.0'
-});
+var KAMAR = new katal({ url: 'student.kamar.nz' });
 
-KAMAR.authenticate({
-    username: 'web.student',
-    password: 'student'
-}, (err, Key) => {
-    if (err)
-        return console.error(err);
-    KAMAR.getFile(`StudentTimetable_2016TT_web.student`, {
-        Command: 'GetStudentDetails',
-        Key,
-        FileStudentID: 'web.student',
-        PastoralNotes: ''
-    }, (error, result) => console.info(error || JSON.stringify(result, null, 4)));
-});
+
+KAMAR
+  .authenticate({ username: 'web.student', password: 'student' })
+  .then(key => KAMAR
+    .getAbsences({ username: 'web.student', key })
+    .then(absences => console.log(absences))
+    .catch(err => console.error(err)))
+  .catch(err => console.error(err));
 ```
-See [example.js](example.js) or [try it now on tonicdev.com](https://tonicdev.com/npm/katal)
-# Official KAMAR API
+See [example.js](example.js) or [try it in your browser on runkit.com](https://runkit.com/npm/katal)
 
-Read the [KAMAR API Docs](api.md)
+# low-level KAMAR API
+
+The low-level, XML-based API has been (unofficially) documented in the following file: [KAMAR API Docs](api.md)

@@ -1,17 +1,11 @@
 const katal = require('katal');
-var KAMAR = new katal('https://student.kamar.nz/api/api.php', 'JSON');
+var KAMAR = new katal({ url: 'student.kamar.nz' });
 
-KAMAR.authenticate({
-    username: 'web.student',
-    password: 'student'
-}, (err, Key) => {
-    if (err)
-        return console.error(err);
-    console.log(Key);
-    KAMAR.getFile(`StudentTimetable_2016TT_web.student`, {
-        Command: 'GetStudentDetails',
-        Key,
-        FileStudentID: 'web.student',
-        PastoralNotes: ''
-    }, (error, result) => console.info(error || JSON.stringify(result, null, 4)));
-});
+
+KAMAR
+  .authenticate({ username: 'web.student', password: 'student' })
+  .then(key => KAMAR
+    .getAbsences({ username: 'web.student', key })
+    .then(absences => console.log(absences))
+    .catch(err => console.error(err)))
+  .catch(err => console.error(err));
