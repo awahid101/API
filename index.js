@@ -1,7 +1,7 @@
 const {parseString} = require('xml2js'),
       {version} = require('./package'),
       request = require('request'),
-      chalk = require('chalk'),
+      chalk = require('chalk');
 
 /**
  * KAMAR API class
