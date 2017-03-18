@@ -1,5 +1,5 @@
 const katal = require('katal');
-var KAMAR = new katal({ url: 'student.kamar.nz' });
+var KAMAR = new katal({ portal: 'student.kamar.nz' });
 
 
 KAMAR

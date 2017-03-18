@@ -319,6 +319,22 @@ class KAMAR {
     }
 
     /**
+     * search the student database - Note that you must have a teacher's or admin's key to do this.
+     * @param {object} credentials - The key in an object. (user must be allowed to do this command)
+     * @returns {Promise}
+     */
+    searchStudents(credentials, query) {
+        return new Promise((resolve, reject) => this
+            .fetch({
+                Command: 'SearchStudents',
+                Key: credentials.key,
+                Criteria: query
+            })
+            .then(response => resolve((response.SearchStudentsResults.Students || [{}])[0].Student || []))
+            .catch(err => reject(err)));  
+    }
+
+    /**
      * get NCEASummary - Note that OfficialResults & Results are both in seperate files.
      * @param {object} credentials - The username and key in an object.
      * @returns {Promise}
@@ -426,68 +442,6 @@ class KAMAR {
         'END:VCARD'].join('\n');
     }
     
-    /**
-     * convert Absences to ASCII table (TXT) format.
-     * @param {object} credentials - The username and key in an object.
-     * @returns {string} VCF String
-     */
-    makeASCIItableWithAbsences(credentials) {
-        return new Promise((resolve, reject) => {
-            this.fetch({
-                Command: 'GetStudentAttendance',
-                FileName: `StudentAttendance_0_${this.TT}_${credentials.username}`,
-                Key: credentials.key,
-                FileStudentID: credentials.username,
-                Grid: this.TT
-            }).then(response => {
-                const TDateString = (new Date()).toDateString();
-                var Ar = response.StudentAttendanceResults.Weeks[0].Week,
-                    I, //WkNo
-                    term = 1, //School Term
-                    Rows = [
-                        'Attendance        ╔══════════════╦══════════════╦══════════════╦══════════════╦══════════════╗',
-                        ' @'+TDateString+' ║    Monday    ║   Tuesday    ║   Wednesday  ║   Thursday   ║    Friday    ║',
-                        '╔══════════╦═══╦══╬═╤═╤═╤══╤═╤═╤═╬═╤═╤═╤══╤═╤═╤═╬═╤═╤═╤══╤═╤═╤═╬═╤═╤═╤══╤═╤═╤═╬═╤═╤═╤══╤═╤═╤═╣',
-                        '║ Week Of  ║Trm║Wk║F│1│2│HM│3│4│5║F│1│2│HM│3│4│5║F│1│2│HM│3│4│5║F│1│2│HM│3│4│5║F│1│2│HM│3│4│5║',
-                        '╟──────────╫───╫──╫─┼─┼─┼──┼─┼─┼─╫─┼─┼─┼──┼─┼─┼─╫─┼─┼─┼──┼─┼─┼─╫─┼─┼─┼──┼─┼─┼─╫─┼─┼─┼──┼─┼─┼─╢'
-                    ];
-                Ar[Ar.length] = { WeekStart: ['1970-01-01'] }; //wat???
-                const Cc = mark => {
-                            if (mark == 'J') mark = chalk.magenta('J');
-                    else if (mark == 'U') mark = chalk.red('U');
-                    else if (mark == 'L') mark = chalk.yellow('L');
-                    else if (mark == 'O') mark = chalk.blue('O');
-                    else                  mark = chalk.grey(mark);
-                    return mark;
-                };
-                for (var i = 0; i < Ar.length - 1; i++) {
-                    if ((I = i + 1) < 10)
-                        I = '0' + I;
-                    var rEdit = ['', Ar[i].WeekStart[0], ` ${term} `, I, ''].join('║'); //start of row, up to Wk No.
-                    const Cols = Ar[i].Days[0].Day;
 
-                    for (var j = 0; j < Cols.length; j++) { //no need for Cols.length, when has there ever been more or less than 5 days in a week?
-                        //^ http://www.dailymail.co.uk/news/article-2080211/Samoa-calendar-change-Samoans-lose-24-hours-island-moves-international-dateline.html
-                        const Ht = (Cols[j]._ || '..........').substring(0, 7).split('');
-                        rEdit += [
-                            j == 2 ? ' ' : Ht[0],           //Form               Tutor
-                            j == 2 ? ' ' : Ht[1],           //Period 1
-                            Ht[2],                          //Period 2
-                            (j != 2 ? ' ' : Ht[3]) + ' ',   //House/Manaaki (HM) Alternate Tutor (ATxx)
-                            Ht[4],                          //Period 3
-                            Ht[5],                          //Period 4
-                            Ht[6]                           //Period 5
-                        ].join('│') + '║';
-                    }
-                    Rows.push(rEdit);
-                    //if mroe than 1 week between weeks, then we know its holidays - term break
-                    if (((new Date(Ar[i + 1].WeekStart[0])).getTime() - (new Date(Ar[i].WeekStart[0])).getTime()) / 604800000  != 1) //1Wk == 604,800,000 == (1000 * 60 * 60 * 24 * 7)
-                        void term++ || Rows.push('╠══════════╬═══╬══╬═╪═╪═╪══╪═╪═╪═╬═╪═╪═╪══╪═╪═╪═╬═╪═╪═╪══╪═╪═╪═╬═╪═╪═╪══╪═╪═╪═╬═╪═╪═╪══╪═╪═╪═╣');
-                }
-                Rows.push('╚══════════╩═══╩══╩═╧═╧═╧══╧═╧═╧═╩═╧═╧═╧══╧═╧═╧═╩═╧═╧═╧══╧═╧═╧═╩═╧═╧═╧══╧═╧═╧═╩═╧═╧═╧══╧═╧═╧═╝');
-                resolve(Rows.join('\n')); 
-            }).catch(err => reject(err));
-        });
-    }
 };
 module.exports = KAMAR;

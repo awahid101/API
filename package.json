@@ -1,6 +1,6 @@
 {
   "name": "katal",
-  "version": "7.2.6",
+  "version": "7.3.0",
   "description": "Unofficial module for interfacing with the undocumented KAMAR API (project katal)",
   "main": "index.js",
   "dependencies": {

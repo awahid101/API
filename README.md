@@ -51,6 +51,8 @@ KAMAR.getXXXXX(credentials);  //credentials is an object containing `username` a
  - `getResults` - Note that OfficialResults & NCEASummary are both in seperate files.
  - `getNCEASummary` - Note that OfficialResults & Results are both in seperate files.
  - -----
+ - `searchStudents` - Note that you need to be authenticated with a user who has permission to do this.
+ - -----
  - `getFile` - fetch any file - Note that more convenient methods exist for common files.
  - -----
  - `makevCardFromDetails` - convert Details to vCard (VCF) format.
@@ -62,7 +64,7 @@ See the [Example Responses](Examples) and the [FileName rules](api.md#4-get-more
 
 ```js    
 const katal = require('katal');
-var KAMAR = new katal({ url: 'student.kamar.nz' });
+var KAMAR = new katal({ portal: 'student.kamar.nz' });
 
 
 KAMAR
