@@ -58,6 +58,7 @@ This should return:
 </SettingsResults>
 ```
 In this file there are lots of setting that have been specified by your IT admin, they are explained below:
+
 | Property Name | Usage/Explianation |
 | ------------- | ------------------ |
 | FileName | This is the name of the file within FileMaker Pro, the database software. This is present in almost all requests. |
