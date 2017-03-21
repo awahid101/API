@@ -6,14 +6,15 @@ POST to `/api/api.php` with `application/x-www-form-urlencoded`.
 
 UserAgent: `KAMAR/{{version}} CFNetwork/758.4.3 Darwin/15.5.0`
 
-Note: documentation has been tested with KAMAR Mobile `v1455` and `v21xx`.
+Note: documentation has been tested with KAMAR Mobile `v1455` and `v21xx`.    
+
+> :warning: **As of April 2017, `FileName` is deprecated, and using it will return an error.** Also, `FileStudentID` has been replaced with `StudentID`.
 
 # 1. Get `ServerSettings` (optional)
 
 
 ```
 Command:	GetSettings
-FileName:	ServerSettings
 Key:		vtku
 ```
 
@@ -61,25 +62,24 @@ In this file there are lots of setting that have been specified by your IT admin
 
 | Property Name | Usage/Explianation |
 | ------------- | ------------------ |
-| FileName | This is the name of the file within FileMaker Pro, the database software. This is present in almost all requests. |
-| ErrorCode | 0 unless there was an error |
-| MiniOSVersion | for the iOS app to check against, and refuse to run if the iOS app is outdated. |
-| MinAndroidVersion | *same as above but for the Android app* |
-| StudentsAllowed | This tells the app how many students it may save in the portal list. If 0 then the API may not be used by Students |
-| StaffAllowed | *same as above but for Staff* |
-| StudentsSavedPasswords | Wether or not Student's passwords may be saved in the app. If 0 (No) then the key may still be saved. |
-| StaffSavedPasswords | *same as above but for Staff* |
-| SchoolName | The name of the school, to display throughout that app. |
-| LogoPath | the url of the school's logo, by default it is the KAMAR logo. By default the url is `/school-assets/logo.png` |
-| AssessmentTypesShown | This is an array of characters (sperated by nothing) which specify what type of assesments are shown in the results view. (e.g. NCEA, IB, Cambridge, E-ASSTLE etc.) |
-| UserAccess | Each child of this element has an `index` attribute, which specifies the logon level. Typicly `0` is unauthenticated, `1` is student, `2` is caregiver, `10` is teacher etc. **This varies between school** With in each `User` element are elements for each section, which specify wether or not the that category of users can view that infomation. |
+| `FileName` | ~The name of the file within FileMaker Pro, the database software. This is present in almost all requests.~ **This is officially deprecated in request headers now (April 2017).** |
+| `ErrorCode` | 0 unless there was an error |
+| `MiniOSVersion` | for the iOS app to check against, and refuse to run if the iOS app is outdated. |
+| `MinAndroidVersion` | *same as above but for the Android app* |
+| `StudentsAllowed` | This tells the app how many students it may save in the portal list. If 0 then the API may not be used by Students |
+| `StaffAllowed` | *same as above but for Staff* |
+| `StudentsSavedPasswords` | Wether or not Student's passwords may be saved in the app. If 0 (No) then the key may still be saved. |
+| `StaffSavedPasswords` | *same as above but for Staff* |
+| `SchoolName` | The name of the school, to display throughout that app. |
+| `LogoPath` | the url of the school's logo, by default it is the KAMAR logo. By default the url is `/school-assets/logo.png` |
+| `AssessmentTypesShown` | This is an array of characters (sperated by nothing) which specify what type of assesments are shown in the results view. (e.g. NCEA, IB, Cambridge, E-ASSTLE etc.) |
+| `UserAccess` | Each child of this element has an `index` attribute, which specifies the logon level. Typicly `0` is unauthenticated, `1` is student, `2` is caregiver, `10` is teacher etc. **This varies between school** With in each `User` element are elements for each section, which specify wether or not the that category of users can view that infomation. |
 
 
 # 2. Authenticate
 
 ```handlebars
 Command:    Logon
-FileName:   Logon
 Key:        vtku
 Username:   {{Username}}
 Password:   {{Password}}
@@ -106,7 +106,6 @@ If logged in as a teacher, there will be additional personal infomation included
 ```handlebars
 
 Command:	GetGlobals
-FileName:	Globals
 Key:    	{{key returned by step #2}}
 ```
 
@@ -147,7 +146,6 @@ Placeholders:
 > Obviouly, for all commands which require authentication, a suistable key must also be provided in the `Key` parameter.
 ### `GetCalendar`
 ```
-  FileName = "Calendar_{year}"
   Year = "{year}"
 ```
 The calendar file is useful to combine with the timetable, to see what type of day it it (for example, wether the school is `Open` or if it's a `Holiday`).
@@ -157,16 +155,14 @@ The calendar file is useful to combine with the timetable, to see what type of d
 ```
   DateStart = "1/6/2016"
   DateFinish = "30/6/2016"
-  FileName = "Events_1_6_2016_30_6_2016_NO"
   ShowAll = "NO"
 ```
-This is the data for the "events" section in the KAMAR portal. `DateStart` and `DateFinish` specify the range of events to download, and the FileName must coresponde with those values.
+This is the data for the "events" section in the KAMAR portal. `DateStart` and `DateFinish` specify the range of events to download.
 The example is abopve is for events in June 2016, between (and including) `2016-06-01` and `2016-06-30`.
 
 ### `GetNotices`
 ```
   Date = "16/6/2016"
-  FileName = "Notices_16_6_2016_NO"
   ShowAll = "NO"
 ```
 Notices can only be fetched for one day per request, unlike `Events` above.     
@@ -174,8 +170,7 @@ It is unclear as to what the purpose of the `ShowAll` parameter is.
 
 ### `GetStudentAbsenceStats`
 ```
-  FileName = "StudentAbsStats_{year}TT_{ID}"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
   Grid = "{year}TT"
 ```
 These are the statistics about a students absences, not the actual data.     
@@ -183,8 +178,7 @@ See the [#GetStudentAttendance](#GetStudentAttendance) for general info about ab
 
 ### `GetStudentAttendance`
 ```
-  FileName = "StudentAttendance_0_{year}TT_{ID}"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
   Grid = "{year}TT"
 ```
 Student atttendance is classified with the "JULOP." system: 
@@ -201,39 +195,34 @@ Student atttendance is classified with the "JULOP." system:
 
 ### `GetStudentDetails`
 ```
-  FileName = "StudentDetails_{ID}_"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
   PastoralNotes = ""
 ```
-Personal infomation about students. The trailing underscore in the `FileName` is deliberate.
+Personal infomation about students.
 
 
 ### `GetStudentNCEASummary`
 ```
-  FileName = "GetStudentNCEASummary_{ID}"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
 ```
 A Summary of the student's NCEA results in the past 5 years. Should/could be combined with `GetStudentOfficialResults`.
 
 ### `GetStudentOfficialResults`
 ```
-  FileName = "StudentOfficialResults_{ID}"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
 ```
 Official NCEA results, double-checked or directly provided by NZQA. 
 
 
 ### `GetStudentResults`
 ```
-  FileName = "GetStudentResults_{ID}"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
 ```
 Results for non-NCEA assignments. For juniors, this is the only file which has their results.
 
 ### `GetStudentTimetable`
 ```
-  FileName = "StudentTimetable_{year}TT_{ID}"
-  FileStudentID = "{ID}"
+  StudentID = "{ID}"
   Grid = "{year}TT"
 ```
 The student's timetable. 
@@ -245,7 +234,6 @@ To find out the current day, lookup the day in `GetCalendar` and use the week-in
 
 ### `GetStudentGroups`
 ```
-  FileName = "StudentGroups_{ID}"
   StudentID = "{ID}"
   Tchr = 0
 ```
@@ -254,7 +242,6 @@ As of writing, there is little support in the API for student-led groups.
 
 ### `GetStudentPastoral`
 ```
-  FileName	= "StudentPastoral_{ID}"
   A		= 1
   C		= 1
   D		= 1
@@ -281,7 +268,6 @@ To find out more infomation about student(s), use the other methods (such as `Ge
   Tchr = "XY"
 ```
 The `Tchr` parameter is the teacher's code, which is like a student ID.   
-Note: there is no `FileName` attribute for this command.
 
 ### `GetTeacherAbsLog` (Teacher only)
 ```

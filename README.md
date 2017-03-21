@@ -39,7 +39,7 @@ KAMAR
 
 ## Fetching Files
 ```js
-KAMAR.getXXXXX(credentials);  //credentials is an object containing `username` and `key`.
+KAMAR.getXXXXX(credentials);  //credentials is the object returned KAMAR.authenticate (containing `username`, `key` & `authLevel`).
 ```
 
 ### Methods
@@ -53,7 +53,8 @@ KAMAR.getXXXXX(credentials);  //credentials is an object containing `username` a
  - -----
  - `searchStudents` - Note that you need to be authenticated with a user who has permission to do this.
  - -----
- - `getFile` - fetch any file - Note that more convenient methods exist for common files.
+ - `sendCommand` - send a command to KAMAR - Note that more convenient methods exist for common files.
+ - ~getFile~ - deprecated by KAMAR (April 2017). Use `sendCommand` instead.
  - -----
  - `makevCardFromDetails` - convert Details to vCard (VCF) format.
  - `makeASCIItableWithAbsences` - convert Absences to ASCII table (TXT) format.

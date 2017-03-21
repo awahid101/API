@@ -64,14 +64,17 @@ class KAMAR {
         return new Promise((resolve, reject) => {
             this.fetch({
                 Command: 'Logon',
-                FileName: 'Logon',
                 Key: 'vtku',
                 Username: userObj.username,
                 Password: userObj.password
             })
             .then(result => {
                 if (result.LogonResults.Success && result.LogonResults.Success[0] == 'YES')
-                    return resolve(result.LogonResults.Key[0]);
+                    return resolve({
+                        'username': userObj.username,
+                        'key': result.LogonResults.Key[0],
+                        'authLevel': Number(result.LogonResults.LogonLevel)
+                    });
                 reject(result.LogonResults.Error[0]);
             })
             .catch(err => reject(err));
@@ -87,9 +90,8 @@ class KAMAR {
         return new Promise((resolve, reject) => {
             this.fetch({
                 Command: 'GetStudentAttendance',
-                FileName: `StudentAttendance_0_${this.TT}_${credentials.username}`,
                 Key: credentials.key,
-                FileStudentID: credentials.username,
+                StudentID: credentials.username,
                 Grid: this.TT
             }).then(response => {
                 if (!response || !response.StudentAttendanceResults || !response.StudentAttendanceResults.Weeks) {
@@ -108,7 +110,7 @@ class KAMAR {
                         Absences[i][daysManifest[j]] = (days[j]._ || '----------').substring(0, 7);
                 }
                 this.WkNo = Absences.length;
-                console.log(chalk.magenta('Week No.'), chalk.magenta.bold(this.WkNo)); //DEBUG
+                //console.log(chalk.magenta('Week No.'), chalk.magenta.bold(this.WkNo)); //DEBUG
 
                 resolve(Absences);
             }).catch(err => reject(err));
@@ -124,9 +126,8 @@ class KAMAR {
         return new Promise((resolve, reject) => {
             this.fetch({
                 Command: 'GetStudentAbsenceStats',
-                FileName: `StudentAbsStats_${this.TT}_${credentials.username}`,
                 Key: credentials.key,
-                FileStudentID: credentials.username,
+                StudentID: credentials.username,
                 Grid: this.year
             }).then(response => {
                 if (!response.StudentAbsenceStatsResults.NumberRecords)
@@ -138,7 +139,7 @@ class KAMAR {
 
     /**
      * Get this- & next week's Timetable.
-     * @param {object} credentials - The username and key in an object.
+     * @param {object} credentials - The username, key, and authLevel in an object. If authLevel is 10 then the teacher timetable is dowloaded.
      * @returns {Promise}
      */
     getTimeTable(credentials) {
@@ -149,13 +150,20 @@ class KAMAR {
                 console.warn(chalk.cyan.bold('[KAMAR-API]'), msg);
                 return reject(Error(msg));
             }
-            this.fetch({
+            var file = {
                 Command: 'GetStudentTimetable',
-                FileName: `StudentTimetable_${this.TT}_${credentials.username}`,
                 Key: credentials.key,
-                FileStudentID: credentials.username,
+                StudentID: credentials.username,
                 Grid: this.TT
-            }).then(response => {
+            }; 
+            if (credentials.authLevel && credentials.authLevel == 10) //If teacher
+                file = {
+                    Command: 'GetTeacherTimetable',
+                    Key: credentials.key,
+                    Grid: this.TT,
+                    Tchr: credentials.username
+                };
+            this.fetch(file).then(response => {
                 function getTimetableForWeek(weekOffset) {
                     var HTMout = [0,[0,1,0,0,1,0,1,1],[0,1,1,1,1,0,0,1],[0,1,1,0,1,1,0,0],[0,1,1,0,0,1,0,1],[0,1,1,0,1,0,0,0]],
                         TT = response.StudentTimetableResults.Students[0].Student[0].TimetableData,
@@ -192,6 +200,33 @@ class KAMAR {
     }
 
     /**
+     * Get this year's calendar. No authentication required.
+     * @returns {Promise}
+     */
+     getCalendar() {
+         return new Promise((resolve, reject) => {
+            this.fetch({
+                Command: 'GetCalendar',
+                Year: this.year,
+                Key: 'vtku'
+            }).then(response => {
+                if (response.CalendarResults.ErrorCode[0] != 0)
+                    reject(response.CalendarResults.ErrorCode[0])
+                var days = response.CalendarResults.Days[0].Day,
+                    resp = {};
+                for (var i = 0; i < days.length; i++) 
+                    resp[days[i].Date] = {
+                        'status': days[i].Status[0],
+                        'TTday': days[i].DayTT[0] || undefined,
+                        'term': days[i].Term[0] || undefined, //no dif to TermA AFAIK, except doesn't exist for holidays
+                        'week': days[i].Week[0] || undefined, //no dif to WeekA and WeekYear AFAIK., except doesn't exist for holidays
+                    }
+                resolve(resp);
+            }).catch(err => reject(err));
+         });
+     }
+
+    /**
      * Get Personal Details about student.
      * @param {object} credentials - The username and key in an object.
      * @returns {Promise}
@@ -200,9 +235,8 @@ class KAMAR {
         return new Promise((resolve, reject) => {
             this.fetch({
                 Command: 'GetStudentDetails',
-                FileName: `StudentDetails_${credentials.username}_`,
                 Key: credentials.key,
-                FileStudentID: credentials.username,
+                StudentID: credentials.username,
                 PastoralNotes: ''
             }).then(response => {
                 const _ = response.StudentDetailsResults.Students[0].Student[0];
@@ -283,9 +317,8 @@ class KAMAR {
         return new Promise((resolve, reject) => {
             this.fetch({
                 Command: 'GetStudentResults',
-                FileName: `GetStudentResults_${credentials.username}`,
                 Key: credentials.key,
-                FileStudentID: credentials.username
+                StudentID: credentials.username
             }).then(response => {
                 var RES = response.StudentResultsResults.ResultLevels[0].ResultLevel,
                     ncea = [],
@@ -296,7 +329,7 @@ class KAMAR {
                     else if (grade.match('Merit'))              grade = `M`;
                     else if (grade.match('Not'))                grade = `N`;
                     else if (grade.match(/Achieve(ment|d)/))    grade = `A`;
-                    else                                        console.log('Incomprehensible', grade); //nothing rn for debug
+                    else                                        console.log('Incomprehensible', grade); //nothing rn for debug - need to investigate with IB grades.
                     return [orgGrade, grade];
                 };
                 for (var h = 0; h < RES.length; h++) {
@@ -343,9 +376,8 @@ class KAMAR {
         return new Promise((resolve, reject) => {
             this.fetch({
                 Command: 'GetStudentNCEASummary',
-                FileName: `GetStudentNCEASummary_${credentials.username}`,
                 Key: credentials.key,
-                FileStudentID: credentials.username
+                StudentID: credentials.username
             }).then(response => {
                 const $ = response.StudentNCEASummaryResults.Students[0].Student[0],
                     tt = yt => {
@@ -403,18 +435,24 @@ class KAMAR {
     }
     
     /**
-     * get a file from KAMAR - Note that more convenient methods exist for common files.
-     * @param {string} FileName - The name of the File to fetch
-     * @param {object} form - All form data in JSON format, excluding FileName
+     * make a request to KAMAR - Note that more convenient methods exist for common files.
+     * @param {object} form - All form data in JSON format
      * @returns {Promise}
      */
-    getFile(FileName, form) {
-        form.FileName = FileName;
+    sendCommand(form) {
         return new Promise((resolve, reject) => this
             .fetch(form)
             .then(result => resolve(result))
             .catch(error => reject(error))
         );
+    }
+
+    /**
+     * KAMAR has deprecated the `FileName` atrribute, so the `getFile` method is also deprecated.\nPlease use the `sendCommand` method instead.
+     */
+    getFile() {
+        var up = new Error('KAMAR has deprecated the `FileName` atrribute, so the `getFile` method is also deprecated.\nPlease use the `sendCommand` method instead.');
+        throw up; //ha ha
     }
 
     /**
@@ -441,7 +479,5 @@ class KAMAR {
             'NOTE:Emergency Contact: ' + _.EmergencyContact.Name + ' (' + _.EmergencyContact.phCell + ')',
         'END:VCARD'].join('\n');
     }
-    
-
 };
 module.exports = KAMAR;
